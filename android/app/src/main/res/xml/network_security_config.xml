@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+<!--    <domain-config cleartextTrafficPermitted="true">-->
+<!--        <domain includeSubdomains="true">127.0.0.1</domain>-->
+<!--    </domain-config>-->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">liteavapp.qcloud.com</domain>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">user-gold-cdn.xitu.io</domain>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">1500005830.vod2.myqcloud.com</domain>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">drm.vodplayvideo.net</domain>
+    </domain-config>
+
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">1256524210.vod2.myqcloud.com</domain>
+    </domain-config>
+
+
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">api.weixin.qq.com</domain>
+    </domain-config>
+
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

@@ -1,26 +1,8 @@
-buildscript {
-    ext.kotlin_version = '1.8.0' // 更新Kotlin版本
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url 'https://download.flutter.io'
-        }
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
-
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -40,24 +22,23 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-
 android {
-    namespace = "com.code.navigator"
+    namespace "com.code.navigator"
     compileSdk 34 // flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    // kotlinOptions {
-    //     jvmTarget = JavaVersion.VERSION_1_8
-    // }
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 
     signingConfigs {
         release {
@@ -79,16 +60,6 @@ android {
 
     }
 
-    // defaultConfig {
-    //     // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-    //     applicationId = "com.code.navigator"
-    //     // You can update the following values to match your application needs.
-    //     // For more information, see: https://flutter.dev/to/review-gradle-config.
-    //     minSdk = flutter.minSdkVersion
-    //     targetSdk = flutter.targetSdkVersion
-    //     versionCode = flutter.versionCode
-    //     versionName = flutter.versionName
-    // }
 
     defaultConfig {
         applicationId "com.code.navigator"
@@ -105,7 +76,9 @@ android {
 
     flavorDimensions "flavor"
     productFlavors {
+
         // applicationIdSuffix 会构建出不同 application id 的包
+
         xiaomi {
             dimension "flavor"
             versionNameSuffix "-xiaomi"
@@ -144,7 +117,6 @@ android {
         }
     }
 
-
     buildTypes {
         release {
             // Signing with the debug keys for now, so `flutter run --release` works.
@@ -162,5 +134,19 @@ android {
 }
 
 flutter {
-    source = "../.."
+    source '../..'
+}
+
+dependencies {
+
+    modules {
+        module("com.tencent:mmkv-static") {
+            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
+        }
+        module("com.tencent:mmkv-shared") {
+            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
+        }
+    }
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
