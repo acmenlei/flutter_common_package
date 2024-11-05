@@ -1,0 +1,185 @@
+## 现场
+大家好，我是多喝热水。
+
+事情是这样的，那天晚上老板在群里吐槽说他在编程导航上写了将近 1000 字的评论不小心点了一下黑屏，然后内容就突然没了，如下：
+
+![](https://files.mdnice.com/user/55923/c4ab7bb2-d55a-4c4e-86e4-3944bf144e67.png)
+
+原来是我们编辑器没有做草稿能力，导致关闭后原本编辑的内容都消失了，确实这个体验不太好，想想怎么把这里优化一下。
+
+## 调研
+像我们平时用得比较多的社交平台，比如某音、某书等，先从它们的评论区入手，看看主流的平台是怎么做的。
+
+1）某音
+
+某音的效果是，在某条视频下评论后划走，再**划回来编辑的内容就不在了**，看样子是没有做草稿能力，如图：
+
+![](https://files.mdnice.com/user/55923/f3837f92-60be-456b-86d9-f107305d0f94.gif)
+
+2）某书
+
+某书的效果是，在某个笔记下面评论然后划走，再**回来的时候内容是还在的**。而且每条评论都有自己的编辑态，互不干扰，如图：
+
+![](https://files.mdnice.com/user/55923/b20c95c5-4023-4f65-966f-aed2c2e96d4a.gif)
+
+好看真好看，呸好用真好用，既然体验上某书更好，我决定仿照某书的方案来实现。
+
+![](https://files.mdnice.com/user/55923/745c760d-b271-4002-90e4-b30c3095f2a5.png)
+
+既然要做成某书的效果，那我们就需要解决**两个问题**：
+
+1）他们评论区草稿内容是怎么存的？
+
+2）存在哪里了？
+
+### 内容怎么存？
+先说说我的看法，如果要让每条评论都拥有独立的编辑态，那么肯定是需要一个唯一标识的，那我能想到的唯一标识就是**ID**。
+
+### 内容存哪里？
+存后端还是存前端？存前端的话又存哪里？这里我简单总结了一下：
+
+#### 存后端
+
+**优势**：数据真正的持久化、安全性高
+
+**缺陷**：需要网络连接，依赖后端，开发成本高
+
+#### 存前端
+
+**优势**：简单易用、性能好、脱机可用
+
+**缺陷**：无法真正持久化、存储空间有限、不安全
+
+### 方案选择
+回归到需求本身，我们不需要实时性多么高，所以存前端就已经可以满足我们的需求了。
+
+但在前端存储还有一个存储空间问题，需要考虑一下存储内容的有效时间，过期了就得删除，不然会存在很多冗余数据，所以我们又面临新的问题，**前端用什么来存**？
+
+浏览器常用的存储方案：cookie、localStorage、sessionStorage
+
+1）cookie 是可以设置过期时间的，但如果存 cookie，那它的容量只有5kb，有点**太小了**，并且**每次发请求 cookie 都会被携带上**，无疑是增加了额外的带宽开销
+
+2）sessionStorage 存储空间最大支持5MB，但窗口被关闭后数据就过期了，**有效期仅仅是窗口会话期间**，万一用户不小心关闭了窗口，数据也消失了，所以这个方案也不太妥当
+
+3）相比之下 localStorage 的容量也有 5MB，足够大，但是它本身不支持设置过期时间（默认永久有效），需要人为去控制，好在这个成本并不高，综合之下我们还是选择存 localStorage 了
+
+## 开发
+选好方案后，就可以开始动手开发了！先把**支持控制过期时间** 的 localStorage 逻辑写一下。
+
+写之前我们需要考虑一下代码的复用性，因为在我们网站中，有很多地方都用到了编辑器，比如**评论区、交流内容发布等**，如果每一处都写一遍的话，那这个代码就太冗余了，所以将它封装为一个 hook 是一个不错的选择，代码如下：
+
+```ts
+import { CACHE_TYPE, EXPIRES_TIME } from './constants';
+
+/**
+ * 缓存数据
+ * @param key
+ * @returns
+ */
+export default function useCache(key: string = CACHE_TYPE.ESSAY_CONTENT) {
+  /**
+   *  删除缓存数据
+   */
+  const removeCache = () => {
+    localStorage.removeItem(key);
+  };
+
+  /**
+   * 设置缓存数据
+   * @param data 数据内容
+   * @param expires 过期时间（毫秒）
+   */
+  const setCache = (data: any, expires: number = EXPIRES_TIME) => {
+    const cacheData = {
+      value: data,
+      expires: expires ? Date.now() + expires : null, // 计算过期时间戳
+    };
+    localStorage.setItem(key, JSON.stringify(cacheData));
+  };
+
+  /**
+   *  获取缓存数据
+   * @returns 缓存数据或 null
+   */
+  const getCache = () => {
+    const cachedString = localStorage.getItem(key);
+    if (!cachedString) {
+      return null;
+    }
+    const cachedObject = JSON.parse(cachedString);
+    // 检查是否设置了过期时间并且是否已经过期
+    if (cachedObject.expires && Date.now() > cachedObject.expires) {
+      removeCache(); // 删除已过期的数据
+      return null;
+    }
+    return cachedObject.value;
+  };
+
+  return { removeCache, setCache, getCache };
+}
+```
+
+简单解释一下上面的代码：
+
+1）useCache 函数主要接收一个 KEY，**删除、获取、设置草稿数据都会用到这个 KEY**，且我们保证它是唯一的
+
+2）在设置需要缓存内容时（setCache），会给出一个 expires 的参数用于控制该数据的有效时间
+
+3）获取数据的时候会校验一下有效时间，如果已经过期了则返回 null
+
+### 在编辑器中应用
+
+最后我们需要在用到编辑器的地方使用这个 hook。
+
+可能有些小伙伴会觉得我们网站中用到编辑器的地方很多，这一步才是一个**大工程**，其实不然，因为我们所有用到编辑器的地方都是用的同一个组件，我们需要改动的地方就是那个公共的编辑器组件！
+
+这时候封装带来的便捷性就体现的淋漓尽致，省去了不少时间用来摸鱼！！！
+
+改动代码如下（伪代码）：
+```ts
+type GeneralContentEditorProps = {
+  targetId?: string; // 缓存ID
+  // 省略不相关代码...
+};
+
+/**
+ * 通用的内容编辑器
+ * @param props
+ * @returns
+ */
+export default function GeneralContentEditor({
+  targetId,
+  // 省略不相关代码...
+}: GeneralContentEditorProps) {
+  // 省略不相关代码...
+  const [content, setContent] = useState('')
+  const { getCache, setCache, removeCache } = useCache(targetId);
+  
+  useEffect(() => {
+    setContent(getCache() ?? '')
+  }, [])
+}
+```
+
+简单解释一下上面的代码：
+
+1）给编辑器新增了一个属性 targetId，这个 targetId 用来作为缓存的唯一标识，**由使用方提供给我们**
+
+2）初始化的时候去调 getCache 函数读取缓存的数据
+
+3）有内容变更的时候调 setCache 函数去更新缓存的数据
+
+到这里流程已经跑通了，但还缺少重要的一步，需要定时清空一下缓存的数据，因为现在的逻辑是**如果我们不主动去获取这个数据，它还是占据着存储空间**。
+
+#### 清空冗余数据
+其实我们也不需要专门去写定时器来清空，只需要在编辑器初始化的时候去检测一遍就可以，所以代码还需加点料，如下图：
+
+![](https://files.mdnice.com/user/55923/f6f47a1b-3d29-4fab-bae0-f5ab35059f3e.png)
+
+到这一步编辑器草稿能力就完善的差不多了，已经能够正常使用了，我们看看效果，如下：
+
+![](https://files.mdnice.com/user/55923/6bb0b0af-dbd0-4cbb-8871-a6eb9ff9903e.gif)
+
+nice，没有什么问题，感兴趣的小伙伴可以来[编程导航](https://www.code-nav.cn)体验一下，好了，我要去摸鱼了 😋
+
+![](https://files.mdnice.com/user/55923/06793bf2-3c74-4db3-a1f8-55d48959611d.png)
