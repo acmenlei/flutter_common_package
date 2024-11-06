@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:codefather_app/api/http.dart';
 import 'package:codefather_app/components/common_editor/controller.dart';
-import 'package:codefather_app/components/my_divider/index.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/constants/file.dart';
 import 'package:codefather_app/utils/index.dart';
@@ -84,13 +83,11 @@ class _CommonEditorState extends State<CommonEditor>
 
   @override
   Widget build(BuildContext context) {
-    double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return GestureDetector(
-      onTap: () {
-        _dismiss();
-      },
+      onTap: _dismiss,
       child: Padding(
-        padding: EdgeInsets.only(bottom: keyboardHeight),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: SlideTransition(
           position: _offsetAnimation,
           child: GestureDetector(
@@ -106,9 +103,6 @@ class _CommonEditorState extends State<CommonEditor>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildInput(),
-                    const MyDivider(
-                      margin: 8,
-                    ),
                     _buildSelector(),
                   ],
                 ),
@@ -147,6 +141,67 @@ class _CommonEditorState extends State<CommonEditor>
           _buildImageGrid()
         ],
       ),
+    );
+  }
+
+  // 显示图片
+  Widget _buildImageGrid() {
+    if (renderImages.isEmpty) {
+      return const SizedBox();
+    }
+    return GridView.builder(
+      padding: const EdgeInsets.only(bottom: 8),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 6,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+      ),
+      itemCount: renderImages.length,
+      itemBuilder: (context, index) {
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.network(
+                  renderImages[index],
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    renderImages.removeAt(index);
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(1),
+                  decoration: const BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(4),
+                      bottomLeft: Radius.circular(4),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 14,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -329,65 +384,6 @@ class _CommonEditorState extends State<CommonEditor>
     } catch (e) {
       LogUtil.e(e);
     }
-  }
-
-  // 显示图片
-  Widget _buildImageGrid() {
-    if (renderImages.isEmpty) {
-      return const SizedBox();
-    }
-    return GridView.builder(
-      padding: const EdgeInsets.only(bottom: 8),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 6,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-      ),
-      itemCount: renderImages.length,
-      itemBuilder: (context, index) {
-        return Stack(
-          children: [
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: Image.network(
-                  renderImages[index],
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    renderImages.removeAt(index);
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: const BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius:
-                        BorderRadius.only(topRight: Radius.circular(4)),
-                  ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 14,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 }
 
