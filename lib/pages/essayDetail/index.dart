@@ -1,3 +1,4 @@
+import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/components/bottom_info_action/index.dart';
 import 'package:codefather_app/components/comment_list/index.dart';
@@ -54,6 +55,7 @@ class EssayDetailPage extends StatelessWidget {
                 child: Obx(() => PictureList(
                     pictureList: essay.data.value.pictureList ?? [])),
               ),
+              _buildTags(essay),
               _buildPublishTime(essay),
               ..._buildSplitter(),
               _buildCommentList(essay),
@@ -84,6 +86,14 @@ class EssayDetailPage extends StatelessWidget {
           targetType: CommentTypeEnum.essay.value,
         ),
       ),
+    );
+  }
+
+  // 标签
+  _buildTags(EssayDetailController essay) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Obx(() => TagList(tags: essay.data.value.tags ?? [])),
     );
   }
 
