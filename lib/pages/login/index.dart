@@ -207,27 +207,30 @@ class LoginPage extends StatelessWidget {
   _buildWechatLogin() {
     LoginController loginController = Get.find<LoginController>();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CommonIconButton(
-          onPressed: () async {
-            if (!loginController.checked.value) {
-              showToast('请先勾选隐私政策复选框');
-              return;
-            }
-            var isOpenWeChat = await loginController.fluwx.authBy(
-              which: NormalAuth(
-                scope: 'snsapi_userinfo',
-                state: 'wechat_sdk_nav_code',
-              ),
-            );
-            LogUtil.e("点击微信登录按钮打开状态 ---> isOpenWeChat=$isOpenWeChat");
-          },
-          isOutlined: true,
-          imagePath: 'assets/images/ic_wechat_btn.png',
-        ),
-      ],
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonIconButton(
+            onPressed: () async {
+              if (!loginController.checked.value) {
+                showToast('请先勾选隐私政策复选框');
+                return;
+              }
+              var isOpenWeChat = await loginController.fluwx.authBy(
+                which: NormalAuth(
+                  scope: 'snsapi_userinfo',
+                  state: 'wechat_sdk_nav_code',
+                ),
+              );
+              LogUtil.e("点击微信登录按钮打开状态 ---> isOpenWeChat=$isOpenWeChat");
+            },
+            isOutlined: true,
+            imagePath: 'assets/images/ic_wechat_btn.png',
+          ),
+        ],
+      ),
     );
   }
 }
