@@ -52,8 +52,12 @@ class EssayDetailPage extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                child: Obx(() => PictureList(
-                    pictureList: essay.data.value.pictureList ?? [])),
+                child: Obx(
+                  () => PictureList(
+                    pictureList: essay.data.value.pictureList ?? [],
+                    grow: true,
+                  ),
+                ),
               ),
               _buildTags(essay),
               _buildPublishTime(essay),
