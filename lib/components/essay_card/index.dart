@@ -69,7 +69,7 @@ class EssayCard extends StatelessWidget {
         width: double.infinity,
         child: Text(
           content,
-          style: const TextStyle(color: tertiaryColor, fontSize: 14),
+          style: const TextStyle(color: secondaryColor, fontSize: 14),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
