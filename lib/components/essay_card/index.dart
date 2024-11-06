@@ -1,3 +1,4 @@
+import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/models/post_model.dart';
 import 'package:codefather_app/components/picture_list/index.dart';
@@ -87,17 +88,17 @@ class EssayCard extends StatelessWidget {
   // 操作区（点赞/评论/收藏）
   Widget _buildAction() {
     // 使用一个列表来存储操作项
-    final actions = [
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
       _buildActionItem(Icons.thumb_up_alt_outlined, data.thumbNum ?? 0),
       // _buildActionItem(Icons.star_border, widget.data.favourNum ?? 0),
       _buildActionItem(Icons.mode_comment_outlined, data.commentNum ?? 0),
-    ];
-
-    return Container(
-      margin: const EdgeInsets.only(top: 8),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: actions,
+      const Spacer(),
+      TagList(tags: data.tags ?? [], fontSize: 13, max: 3)
+    ],
       ),
     );
   }
