@@ -48,6 +48,7 @@ class _EssayPageState extends State<EssayPage> with TickerProviderStateMixin {
           showModalBottomSheet(
             backgroundColor: Colors.transparent,
             context: context,
+            useSafeArea: true, // todo 待验证是否生效
             //             {
             //   "atUserList": [],
             //   "clubId": 0,
