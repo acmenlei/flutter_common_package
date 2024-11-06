@@ -83,11 +83,11 @@ class _CommonEditorState extends State<CommonEditor>
 
   @override
   Widget build(BuildContext context) {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return GestureDetector(
       onTap: _dismiss,
-      child: Padding(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+        margin: EdgeInsets.only(bottom: keyboardHeight),
         child: SlideTransition(
           position: _offsetAnimation,
           child: GestureDetector(
@@ -97,13 +97,14 @@ class _CommonEditorState extends State<CommonEditor>
                   const BorderRadius.vertical(top: Radius.circular(8.0)),
               child: Container(
                 color: Get.theme.colorScheme.onPrimary,
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(left: 14.0, right: 14, top: 14),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildInput(),
+                    _buildInput(context),
                     _buildSelector(),
+                    const SizedBox(height: 2,)
                   ],
                 ),
               ),
@@ -115,7 +116,7 @@ class _CommonEditorState extends State<CommonEditor>
   }
 
   // 输入框区域
-  _buildInput() {
+  _buildInput(context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
