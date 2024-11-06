@@ -288,7 +288,7 @@ class _CommonEditorState extends State<CommonEditor>
           allViewTitle: "全部图片",
           useDetailsView: false,
           selectCircleStrokeColor: getPrimaryColor(),
-          exceptMimeType: {MimeType.PNG, MimeType.JPEG, MimeType.WEBP},
+          // exceptMimeType: {MimeType.PNG, MimeType.JPEG, MimeType.WEBP}, 排除可以选择的照片
         ),
       );
     } on Exception catch (e) {
