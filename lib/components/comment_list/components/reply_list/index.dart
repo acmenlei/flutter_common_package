@@ -21,7 +21,7 @@ class ReplyList extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           color: tertiaryColor.withOpacity(0.04)),
