@@ -83,6 +83,9 @@ abstract class ApiService {
   // 获取登录信息
   @GET('/user/get/login')
   Future<UserVoModelRecord> getLoginUserUsingGET();
+  // 获取用户信息
+  @GET('/user/get/vo')
+  Future<UserVoModelRecord> getUserVoById(@Query("id") String id);
 
   @POST("/user/login/sms/code/send")
   Future<ResponseBoolModel> sendLoginSmsCodeUsingPOST(

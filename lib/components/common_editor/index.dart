@@ -130,6 +130,7 @@ class _CommonEditorState extends State<CommonEditor>
             maxLength: widget.maxLength,
             focusNode: inputNode,
             minLines: 1,
+            cursorHeight: 16,
             maxLines: widget.maxLength, // 最大行数
             onChanged: (text) => setState(() => _charCount = text.length),
             style: const TextStyle(fontSize: 14),
