@@ -35,7 +35,7 @@ class BottomInfoAction extends StatelessWidget {
         color: Get.theme.colorScheme.surface,
       ),
       padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-      height: 80,
+      height: 75,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -69,19 +69,19 @@ class BottomInfoAction extends StatelessWidget {
 
   // 渲染目录控制器
   _buildTocButton(context, tocController) {
-    if(tocController == null) {
+    if (tocController == null) {
       return Container();
     }
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
-          builder: (context) => TocWidget(controller: tocController, shrinkWrap: true),
+          builder: (context) =>
+              TocWidget(controller: tocController, shrinkWrap: true),
           context: context,
           showDragHandle: true,
           enableDrag: true,
           backgroundColor: Get.theme.colorScheme.surface,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         );
       },
       child: Container(
@@ -108,7 +108,6 @@ class BottomInfoAction extends StatelessWidget {
   _buildPublishInput() {
     return Expanded(
       child: Container(
-        height: double.infinity,
         margin: const EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 8),
         decoration: BoxDecoration(
           color: Colors.grey[100],
@@ -118,9 +117,19 @@ class BottomInfoAction extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              '写评论',
-              style: TextStyle(color: tertiaryColor.withOpacity(.5)),
+            child: Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.pen,
+                  color: tertiaryColor.withOpacity(.5),
+                  size: 14,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '写评论',
+                  style: TextStyle(color: tertiaryColor.withOpacity(.5)),
+                )
+              ],
             ),
           ),
         ),
