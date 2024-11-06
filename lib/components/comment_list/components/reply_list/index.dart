@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/constants/colors.dart';
+import 'package:get/get.dart';
 
 /// 回复列表
 class ReplyList extends StatelessWidget {
@@ -47,8 +49,13 @@ class ReplyList extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       text: TextSpan(style: const TextStyle(color: tertiaryColor), children: [
         TextSpan(
-            text: reply.user?.userName,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+          text: reply.user?.userName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Get.toNamed('/user/${reply.user?.id}', arguments: {'id': reply.user?.id});
+            },
+        ),
         _buildReplyUserName(reply),
         const TextSpan(text: "："),
         TextSpan(text: reply.content)
@@ -69,6 +76,11 @@ class ReplyList extends StatelessWidget {
         TextSpan(
           text: reply.replyUser?.userName,
           style: const TextStyle(fontWeight: FontWeight.bold),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Get.toNamed('/user/${reply.replyUser?.id}',
+                  arguments: {'id': reply.replyUser?.id});
+            },
         )
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/models/user_model.dart';
 import 'package:codefather_app/constants/colors.dart';
+import 'package:get/get.dart';
 
 /// 通用的用户昵称
 class UserTitle extends StatelessWidget {
@@ -17,14 +18,18 @@ class UserTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      user?.userName ?? '',
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontSize: fontSize,
-        color: color,
-        fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+    return GestureDetector(
+      onTap: () =>
+          Get.toNamed('/user/${user?.id}', arguments: {'id': user?.id}),
+      child: Text(
+        user?.userName ?? '',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: fontSize,
+          color: color,
+          fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+        ),
       ),
     );
   }
