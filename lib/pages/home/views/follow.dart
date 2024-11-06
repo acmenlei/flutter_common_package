@@ -1,4 +1,3 @@
-import 'package:codefather_app/utils/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/http.dart';
 import 'package:codefather_app/components/infinity_scroll/index.dart';
@@ -33,5 +32,5 @@ class _FollowViewState extends State<FollowView> with AutomaticKeepAliveClientMi
   }
   
   @override
-  bool get wantKeepAlive => isLogin;
+  bool get wantKeepAlive => true;
 }
