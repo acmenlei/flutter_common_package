@@ -50,10 +50,10 @@ android {
             v2SigningEnabled true
         }
         debug {
-            keyAlias "CodeNavigator"
-            keyPassword "AdminCodeNavigator"
-            storeFile file("../codeNavigator.jks")
-            storePassword "AdminCodeNavigator"
+//            keyAlias "CodeNavigator"
+//            keyPassword "AdminCodeNavigator"
+//            storeFile file("../codeNavigator.jks")
+//            storePassword "AdminCodeNavigator"
             v1SigningEnabled true
             v2SigningEnabled true
         }
@@ -121,8 +121,10 @@ android {
         release {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
-            minifyEnabled false
-            shrinkResources false
+//            minifyEnabled false
+//            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -139,14 +141,14 @@ flutter {
 
 dependencies {
 
-    modules {
-        module("com.tencent:mmkv-static") {
-            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
-        }
-        module("com.tencent:mmkv-shared") {
-            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
-        }
-    }
+//    modules {
+//        module("com.tencent:mmkv-static") {
+//            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
+//        }
+//        module("com.tencent:mmkv-shared") {
+//            replacedBy("com.tencent:mmkv", "Using mmkv for flutter")
+//        }
+//    }
 
     implementation 'androidx.multidex:multidex:2.0.1'
 }

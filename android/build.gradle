@@ -1,15 +1,14 @@
 buildscript {
-    ext.kotlin_version = '1.7.10' // 更新Kotlin版本
+    ext.kotlin_version = '1.9.23' // 更新Kotlin版本【重要】
     repositories {
         google()
         mavenCentral()
-        // maven {
-        //     url 'https://download.flutter.io'
-        // }
+        maven {
+            url 'https://download.flutter.io'
+        }
     }
     dependencies {
-        // classpath "com.android.tools.build:gradle:7.0.2"
-        classpath "com.android.tools.build:gradle:7.4.1"  // 根据需要更新 Android Gradle 插件版本
+        classpath "com.android.tools.build:gradle:7.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -18,9 +17,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        // maven {
-        //     url 'https://download.flutter.io'
-        // }
+         maven {
+             url 'https://download.flutter.io'
+         }
     }
 }
 
