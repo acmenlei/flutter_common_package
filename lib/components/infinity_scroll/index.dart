@@ -1,6 +1,5 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-// import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/components/infinity_scroll/controller.dart';
 import 'package:codefather_app/components/my_divider/index.dart';
 import 'package:get/get.dart';
@@ -62,7 +61,7 @@ class InfinityScroll extends StatelessWidget {
                     child:
                         itemRender(infinityScrollController.data[index]),
                   ),
-                  _buildSplitter(),
+                  index < infinityScrollController.data.length - 1 ?  _buildSplitter() : const SizedBox(),
                 ],
               );
             },

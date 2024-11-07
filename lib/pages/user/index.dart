@@ -25,7 +25,7 @@ class UserPage extends StatelessWidget {
               return SliverAppBar(
                 floating: true,
                 snap: true,
-                expandedHeight: 120,
+                expandedHeight: 200,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   background: Container(
