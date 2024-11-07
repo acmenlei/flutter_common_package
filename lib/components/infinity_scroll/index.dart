@@ -26,7 +26,7 @@ class InfinityScroll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController scrollController = ScrollController();
+    // ScrollController scrollController = ScrollController();
     EasyRefreshController easyRefreshController = EasyRefreshController();
     InfinityScrollController infinityScrollController = InfinityScrollController(
       fetcher,
@@ -50,7 +50,7 @@ class InfinityScroll extends StatelessWidget {
           onLoad: infinityScrollController.loadMore,
           child: ListView.builder(
             shrinkWrap: true,
-            controller: scrollController,
+            // controller: scrollController, // 用了 ExtendedNestedScrollView就不需要设置单独的controller了
             padding: const EdgeInsets.all(0), // 默认的内边距
             itemBuilder: (context, index) {
               return Column(

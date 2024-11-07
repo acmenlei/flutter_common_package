@@ -1,218 +1,94 @@
+import 'package:codefather_app/components/common_tabbar_layout/index.dart';
+import 'package:codefather_app/components/common_tabbar_layout/tab_indicator.dart';
+import 'package:codefather_app/pages/home/views/follow.dart';
+import 'package:codefather_app/pages/home/views/hot.dart';
+import 'package:codefather_app/pages/home/views/priority.dart';
+import 'package:codefather_app/pages/home/views/recommand.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:extended_tabs/extended_tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/components/common_editor/index.dart';
-import 'package:codefather_app/constants/colors.dart';
-import 'package:codefather_app/pages/essay/tab_indicator.dart';
-import 'package:codefather_app/utils/index.dart';
 import 'package:get/get.dart';
 
 class EssayPage extends StatefulWidget {
   const EssayPage({super.key});
 
   @override
-  State<EssayPage> createState() => _EssayPageState();
+  EssayPageState createState() {
+    return EssayPageState();
+  }
 }
 
-class _EssayPageState extends State<EssayPage> with TickerProviderStateMixin {
-  late TabController tabController;
-  late ScrollController scrollController;
+class EssayPageState extends State<EssayPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   @override
   void initState() {
-    tabController = TabController(length: 8, vsync: this);
-    scrollController = ScrollController();
-    scrollController.addListener(scrollListener);
     super.initState();
+    _tabController = TabController(length: 4, initialIndex: 0, vsync: this);
   }
 
   @override
   void dispose() {
-    tabController.dispose();
-    scrollController.removeListener(scrollListener);
-    scrollController.dispose();
     super.dispose();
-  }
-
-  void scrollListener() {
-    if (scrollController.position.pixels >=
-        (scrollController.position.maxScrollExtent - 20)) {
-      print("触底加载");
-    }
+    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            context: context,
-            useSafeArea: true, // todo 待验证是否生效
-            //             {
-            //   "atUserList": [],
-            //   "clubId": 0,
-            //   "content": "学习打卡",
-            //   "fileList": [],
-            //   "pictureList": [],
-            //   "tags": [
-            //     "学习打卡"
-            //   ],
-            //   "videoList": []
-            // }
-            builder: (context) => CommonEditor(
-              onSubmit: Http.client.addEssayUsingPOST,
-            ),
-          );
+      body: SafeArea(child: ExtendedNestedScrollView(
+        onlyOneScrollInBody: true,
+        pinnedHeaderSliverHeightBuilder: () {
+          return MediaQuery.of(context).padding.top + kToolbarHeight;
         },
-        child: const Icon(Icons.add),
-      ),
-      body: SafeArea(
-        child: NestedScrollView(
-          controller: scrollController,
-          // innerBoxIsScrolled： NestedScrollView 内部的 ScrollView 是否已经滑动了一些内容，或者说是否有部分内容已经滚动出视口。
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                title: Text(innerBoxIsScrolled ? '用户信息' : '交流'),
-                // floating: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 120,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  'NestedScrollView',
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.titleLarge?.color),
+                ),
               ),
-              SliverPersistentHeader(
-                delegate: MySliverPersistentHeaderDelegate(
-                  child: Container(
-                    color: Get.theme.scaffoldBackgroundColor,
-                    child: ExtendedTabBar(
-                      indicator: CustomTabIndicator(),
-                      indicatorPadding: EdgeInsets.zero, // 去掉指示器的内边距
-                      labelStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      unselectedLabelStyle: const TextStyle(
-                        fontWeight: FontWeight.normal,
-                      ),
-                      labelColor: getPrimaryColor(),
-                      unselectedLabelColor: tertiaryColor.withOpacity(.6),
-                      isScrollable: true,
-                      tabs: const [
-                        Tab(text: "关注"),
-                        Tab(text: '推荐'),
-                        Tab(text: '热门'),
-                        Tab(text: '精选'),
-                        Tab(text: 'Tab 5'),
-                        Tab(text: 'Tab 6'),
-                        Tab(text: 'Tab 7'),
-                        Tab(text: 'Tab 8'),
-                      ],
-                      controller: tabController,
-                    ),
+            ),
+            SliverPersistentHeader(
+              delegate: MySliverPersistentHeaderDelegate(
+                child: Container(
+                  color: Get.theme.scaffoldBackgroundColor,
+                  child: ExtendedTabBar(
+                    labelColor: Colors.black,
+                    indicatorPadding: EdgeInsets.zero, // 去掉指示器的内边距
+                    indicator: CustomTabIndicator(),
+                    isScrollable: true,
+                    tabs: const [
+                      Tab(text: "关注"),
+                      Tab(text: "推荐"),
+                      Tab(text: "精选"),
+                      Tab(text: "热门"),
+                    ],
+                    controller: _tabController,
                   ),
                 ),
-                pinned: true,
-              )
-            ];
-          },
-          body: TabBarView(controller: tabController, children: [
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                margin: const EdgeInsets.all(10),
-                color: Colors.red,
-                child: Text(index.toString()),
+                max: 60, // 最大高度
+                min: 60, // 最小高度
               ),
-              itemCount: 10,
+              pinned: true,
             ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.green,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.blue,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                margin: const EdgeInsets.all(10),
-                color: Colors.red,
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.green,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.yellow,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.yellow,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-            ListView.builder(
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                color: Colors.yellow,
-                margin: const EdgeInsets.all(10),
-                child: Text(index.toString()),
-              ),
-              itemCount: 10,
-            ),
-          ]),
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          children: const <Widget>[
+            FollowView(),
+            RecommandView(),
+            PriorityView(),
+            HotView(),
+          ],
         ),
-      ),
+      )),
     );
-  }
-}
-
-class MySliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-  MySliverPersistentHeaderDelegate({required this.child});
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox(
-      height: maxExtent,
-      child: child,
-    );
-  }
-
-  @override
-  double get maxExtent => 60;
-
-  @override
-  double get minExtent => 60;
-
-  @override
-  bool shouldRebuild(covariant MySliverPersistentHeaderDelegate oldDelegate) {
-    return child != oldDelegate.child;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:extended_tabs/extended_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/components/common_tabbar_layout/tab_indicator.dart';
@@ -40,7 +41,8 @@ class CommonTabBarLayout extends StatefulWidget {
   });
 
   // 默认的 sliverBuilder 实现
-  static List<Widget> _defaultSliverBuilder(BuildContext context, bool innerBoxIsScrolled) {
+  static List<Widget> _defaultSliverBuilder(
+      BuildContext context, bool innerBoxIsScrolled) {
     return []; // 返回一个空的 List<Widget>
   }
 
@@ -78,7 +80,12 @@ class _CommonTabBarLayoutState extends State<CommonTabBarLayout>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: NestedScrollView(
+        child: ExtendedNestedScrollView(
+          pinnedHeaderSliverHeightBuilder: () {
+            return MediaQuery.of(context).padding.top + kToolbarHeight;
+          },
+          onlyOneScrollInBody:
+              true, // 滚动视图只允许存在一个【共用一个scrollController，但是也不会出现tabbarView的重复请求问题】
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             ...widget.sliverBuilder(context, innerBoxIsScrolled),
             SliverPersistentHeader(

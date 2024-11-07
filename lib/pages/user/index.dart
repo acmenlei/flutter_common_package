@@ -17,9 +17,12 @@ class UserPage extends StatelessWidget {
     UserController userController = UserController();
 
     return Scaffold(
-      body: SafeArea(
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+      body: SafeArea(child: Obx(() {
+        List<String> renderTabs =
+            userController.isMy.value ? userPageTabs : otherUserPageTabs;
+
+        return CommonTabBarLayout(
+          sliverBuilder: (context, innerBoxIsScrolled) => [
             Obx(() {
               final userData = userController.data.value;
               return SliverAppBar(
@@ -47,34 +50,18 @@ class UserPage extends StatelessWidget {
                   ],
                 ),
               );
-            }),
-            // SliverToBoxAdapter(
-            //   child: ,
-            // )
+            })
           ],
-          body: Obx(() {
-            List<String> renderTabs =
-                userController.isMy.value ? userPageTabs : otherUserPageTabs;
-
-            return CommonTabBarLayout(
-              tabs: renderTabs.map((tab) => Tab(text: tab)).toList(),
-              tabViewList: renderTabs
-                  .map(
-                    (tab) => UserPostView(
-                      user: userController.data.value,
-                    ),
-                  )
-                  .toList(),
-            );
-          }),
-        ),
-        // child: Center(
-        //   child: FilledButton(
-        //     onPressed: userController.logout,
-        //     child: const Text('退出登录'),
-        //   ),
-        // ),
-      ),
+          tabs: renderTabs.map((tab) => Tab(text: tab)).toList(),
+          tabViewList: renderTabs
+              .map(
+                (tab) => UserPostView(
+                  user: userController.data.value,
+                ),
+              )
+              .toList(),
+        );
+      })),
     );
   }
 }
