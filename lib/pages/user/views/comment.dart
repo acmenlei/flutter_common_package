@@ -4,6 +4,7 @@ import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/constants/comment.dart';
+import 'package:codefather_app/pages/login/auth_service.dart';
 import 'package:codefather_app/utils/index.dart';
 import 'package:codefather_app/utils/toast.dart';
 import 'package:flutter/gestures.dart';
@@ -66,12 +67,15 @@ class UserPageCommentCard extends StatelessWidget {
 
   // 卡片上用户信息
   Widget _buildUserInfo() {
+    AuthService authService = Get.find<AuthService>();
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
           UserAvatar(
-            user: data?.user,
+            // user: data?.user,
+            user: authService.userVo.value,
             size: 10,
           ),
           const SizedBox(
