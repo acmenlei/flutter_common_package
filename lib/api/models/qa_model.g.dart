@@ -1,26 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'qa_vo_model.dart';
+part of 'qa_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-QaVoModelRecord _$QaVoModelRecordFromJson(Map<String, dynamic> json) =>
-    QaVoModelRecord(
-      code: (json['code'] as num).toInt(),
-      data: QaVoModel.fromJson(json['data'] as Map<String, dynamic>),
-      message: json['message'] as String,
-    );
-
-Map<String, dynamic> _$QaVoModelRecordToJson(QaVoModelRecord instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'data': instance.data,
-      'message': instance.message,
-    };
-
-QaVoModel _$QaVoModelFromJson(Map<String, dynamic> json) => QaVoModel(
+QaModel _$QaModelFromJson(Map<String, dynamic> json) => QaModel(
       id: json['id'] as String?,
       title: json['title'] as String?,
       content: json['content'],
@@ -57,7 +43,7 @@ QaVoModel _$QaVoModelFromJson(Map<String, dynamic> json) => QaVoModel(
       hasUpdateAuth: json['hasUpdateAuth'] as bool?,
     );
 
-Map<String, dynamic> _$QaVoModelToJson(QaVoModel instance) => <String, dynamic>{
+Map<String, dynamic> _$QaModelToJson(QaModel instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'content': instance.content,
@@ -87,4 +73,72 @@ Map<String, dynamic> _$QaVoModelToJson(QaVoModel instance) => <String, dynamic>{
       'hasThumb': instance.hasThumb,
       'hasFavour': instance.hasFavour,
       'hasUpdateAuth': instance.hasUpdateAuth,
+    };
+
+BestCommentModel _$BestCommentModelFromJson(Map<String, dynamic> json) =>
+    BestCommentModel(
+      id: json['id'] as String?,
+      targetType: (json['targetType'] as num?)?.toInt(),
+      targetId: json['targetId'] as String?,
+      content: json['content'],
+      plainTextDescription: json['plainTextDescription'] as String?,
+      type: json['type'] as String?,
+      contentType: (json['contentType'] as num?)?.toInt(),
+      thumbNum: (json['thumbNum'] as num?)?.toInt(),
+      reviewStatus: json['reviewStatus'],
+      reviewMessage: json['reviewMessage'],
+      reviewerId: json['reviewerId'],
+      reviewTime: json['reviewTime'],
+      priority: (json['priority'] as num?)?.toInt(),
+      userId: json['userId'] as String?,
+      planetUserId: json['planetUserId'],
+      createTime: (json['createTime'] as num?)?.toInt(),
+      updateTime: (json['updateTime'] as num?)?.toInt(),
+      postId: json['postId'],
+      user: json['user'] == null
+          ? null
+          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      hasThumb: json['hasThumb'],
+      replyVoPage: json['replyVOPage'],
+      needVip: json['needVip'],
+      postVo: json['postVO'],
+      atUserList: json['atUserList'],
+      atUserVoList: json['atUserVOList'],
+      pictureList: json['pictureList'],
+      courseArticleVo: json['courseArticleVO'],
+      qaVo: json['qaVO'] == null
+          ? null
+          : QaModel.fromJson(json['qaVO'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$BestCommentModelToJson(BestCommentModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'targetType': instance.targetType,
+      'targetId': instance.targetId,
+      'content': instance.content,
+      'plainTextDescription': instance.plainTextDescription,
+      'type': instance.type,
+      'contentType': instance.contentType,
+      'thumbNum': instance.thumbNum,
+      'reviewStatus': instance.reviewStatus,
+      'reviewMessage': instance.reviewMessage,
+      'reviewerId': instance.reviewerId,
+      'reviewTime': instance.reviewTime,
+      'priority': instance.priority,
+      'userId': instance.userId,
+      'planetUserId': instance.planetUserId,
+      'createTime': instance.createTime,
+      'updateTime': instance.updateTime,
+      'postId': instance.postId,
+      'user': instance.user,
+      'hasThumb': instance.hasThumb,
+      'replyVOPage': instance.replyVoPage,
+      'needVip': instance.needVip,
+      'postVO': instance.postVo,
+      'atUserList': instance.atUserList,
+      'atUserVOList': instance.atUserVoList,
+      'pictureList': instance.pictureList,
+      'courseArticleVO': instance.courseArticleVo,
+      'qaVO': instance.qaVo,
     };

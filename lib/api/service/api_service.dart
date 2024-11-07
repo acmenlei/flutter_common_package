@@ -5,6 +5,7 @@ import 'package:codefather_app/api/models/comment_vo_model.dart';
 import 'package:codefather_app/api/models/list_model.dart';
 import 'package:codefather_app/api/models/post_vo_model.dart';
 import 'package:codefather_app/api/models/qa_list_model.dart';
+import 'package:codefather_app/api/models/qa_vo_model.dart';
 import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
@@ -160,6 +161,10 @@ abstract class ApiService {
   // 问答
   @POST('/qa/list/page/vo')
   Future<QaModelList> listQaPageUsingPOST(@Body() Map<String, dynamic> params);
+
+  // 获取单条问答
+  @GET('/qa/get/vo')
+  Future<QaVoModelRecord> getQaVoById(@Query("id") String id);
 
   /* 上传多个文件 */
   @POST('/file/upload/batch')

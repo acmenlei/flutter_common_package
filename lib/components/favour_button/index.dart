@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post_vo_model.dart';
 import 'package:codefather_app/components/favour_button/controller.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/utils/index.dart';
@@ -9,7 +8,7 @@ import 'package:get/get.dart';
 // 点赞按钮
 class FavourButton extends StatelessWidget {
   final Axis? axis; // 排版方向
-  final PostVoModel? data; // 数据
+  final dynamic data; // 数据
   final int targetType; // 收藏类型
   final double size;
   final double width;

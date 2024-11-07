@@ -4,6 +4,7 @@ import 'package:codefather_app/pages/login/index.dart';
 import 'package:codefather_app/pages/login/login_binding.dart';
 import 'package:codefather_app/pages/login/login_code.dart';
 import 'package:codefather_app/pages/post/index.dart';
+import 'package:codefather_app/pages/qaDetail/index.dart';
 import 'package:codefather_app/pages/user/index.dart';
 import 'package:codefather_app/pages/webview/web_binding.dart';
 import 'package:codefather_app/pages/webview/web_page.dart';
@@ -21,6 +22,10 @@ final routes = [
   GetPage(
     name: '/essay/:id',
     page: () => const EssayDetailPage(),
+  ),
+  GetPage(
+    name: '/qa/:id',
+    page: () => const QaDetailPage(),
   ),
   GetPage(
     name: '/login',

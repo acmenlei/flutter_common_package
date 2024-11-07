@@ -5,6 +5,7 @@ import 'package:codefather_app/pages/user/views/comment.dart';
 import 'package:codefather_app/pages/user/views/fens.dart';
 import 'package:codefather_app/pages/user/views/follow.dart';
 import 'package:codefather_app/pages/user/views/post.dart';
+import 'package:codefather_app/pages/user/views/qa.dart';
 import 'package:codefather_app/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/pages/user/controller.dart';
@@ -62,26 +63,20 @@ class UserPage extends StatelessWidget {
   }
 
   getRenderTabViews(UserController userController) {
+    final userData = userController.data.value;
     return userController.isMy.value
         ? [
-            UserPostView(user: userController.data.value),
-            UserCommentView(user: userController.data.value),
-            UserFollowView(
-              user: userController.data.value,
-            ),
-            UserFensView(
-              user: userController.data.value,
-            )
+            UserPostView(user: userData),
+            UserCommentView(user: userData),
+            UserQaView(user: userData),
+            UserFollowView(user: userData),
+            UserFensView(user: userData)
           ]
         : [
-            UserPostView(user: userController.data.value),
-            UserCommentView(user: userController.data.value),
-            UserFollowView(
-              user: userController.data.value,
-            ),
-            UserFensView(
-              user: userController.data.value,
-            )
+            UserPostView(user: userData),
+            UserQaView(user: userData),
+            UserFollowView(user: userData),
+            UserFensView(user: userData)
           ];
   }
 }

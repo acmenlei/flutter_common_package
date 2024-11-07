@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/post_vo_model.dart';
 import 'package:codefather_app/components/comment_list/components/comment_item/index.dart';
 import 'package:codefather_app/components/comment_list/controller.dart';
 import 'package:codefather_app/components/reach_bottom_load_list/index.dart';
@@ -11,7 +10,7 @@ import 'package:get/get.dart';
 
 /// 评论列表
 class CommentList extends StatelessWidget {
-  final PostVoModel data; // 评论数据
+  final dynamic data; // 评论数据
   final int targetType; // 当前选中的评论类型
   const CommentList({super.key, required this.data, required this.targetType});
 

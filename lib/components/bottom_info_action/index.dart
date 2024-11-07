@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post_vo_model.dart';
 import 'package:codefather_app/components/comment_button/index.dart';
 import 'package:codefather_app/components/favour_button/index.dart';
 import 'package:codefather_app/components/follow_button/index.dart';
@@ -13,7 +12,7 @@ import 'package:markdown_widget/markdown_widget.dart';
 
 // 底部信息和操作
 class BottomInfoAction extends StatelessWidget {
-  final PostVoModel? post;
+  final dynamic post;
   final TocController? tocController;
   final int thumbTargetType; // 点赞targetType
   final int favourTargetType; // 收藏targetType
