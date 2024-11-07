@@ -52,7 +52,7 @@ class UserPage extends StatelessWidget {
                   StretchMode.zoomBackground
                 ],
               ),
-            )
+            ),
           ],
           tabs: renderTabs.map((tab) => Tab(text: tab)).toList(),
           tabViewList: renderViews,
@@ -66,14 +66,22 @@ class UserPage extends StatelessWidget {
         ? [
             UserPostView(user: userController.data.value),
             UserCommentView(user: userController.data.value),
-            UserFollowView(user: userController.data.value,),
-            UserFensView(user: userController.data.value,)
+            UserFollowView(
+              user: userController.data.value,
+            ),
+            UserFensView(
+              user: userController.data.value,
+            )
           ]
         : [
             UserPostView(user: userController.data.value),
             UserCommentView(user: userController.data.value),
-            UserFollowView(user: userController.data.value,),
-            UserFensView(user: userController.data.value,)
+            UserFollowView(
+              user: userController.data.value,
+            ),
+            UserFensView(
+              user: userController.data.value,
+            )
           ];
   }
 }
