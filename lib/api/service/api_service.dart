@@ -9,6 +9,7 @@ import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
 import 'package:codefather_app/api/models/response_string_model.dart';
+import 'package:codefather_app/api/models/user_list_model.dart';
 import 'package:codefather_app/api/models/user_vo_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -79,6 +80,17 @@ abstract class ApiService {
   @POST("/follow/")
   Future<ResponseNumModel> doFollowUsingPOST(@Body() Map<String, dynamic> body);
 
+  // 我关注的列表
+  @POST('/follow/follow/list/page')
+  Future<UserModelList> listFollowPageUsingPOST(
+      @Body() Map<String, dynamic> body);
+
+  // 我的粉丝
+  @POST('/follow/followed/list/page')
+  Future<UserModelList> listFollowedPageUsingPOST(
+      @Body() Map<String, dynamic> body);
+
+  // 微信授权登录
   @GET('/user/login/wx_open/app')
   Future<UserVoModelRecord> loginByWxOpen(@Query("code") String code);
   // 获取登录信息
@@ -147,8 +159,7 @@ abstract class ApiService {
 
   // 问答
   @POST('/qa/list/page/vo')
-  Future<QaModelList> listQaPageUsingPOST(
-      @Body() Map<String, dynamic> params);
+  Future<QaModelList> listQaPageUsingPOST(@Body() Map<String, dynamic> params);
 
   /* 上传多个文件 */
   @POST('/file/upload/batch')

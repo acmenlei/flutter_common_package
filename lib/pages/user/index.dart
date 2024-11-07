@@ -2,6 +2,8 @@ import 'package:codefather_app/components/common_tabbar_layout/index.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/pages/user/constants.dart';
 import 'package:codefather_app/pages/user/views/comment.dart';
+import 'package:codefather_app/pages/user/views/fens.dart';
+import 'package:codefather_app/pages/user/views/follow.dart';
 import 'package:codefather_app/pages/user/views/post.dart';
 import 'package:codefather_app/utils/index.dart';
 import 'package:flutter/material.dart';
@@ -64,10 +66,14 @@ class UserPage extends StatelessWidget {
         ? [
             UserPostView(user: userController.data.value),
             UserCommentView(user: userController.data.value),
+            UserFollowView(user: userController.data.value,),
+            UserFensView(user: userController.data.value,)
           ]
         : [
             UserPostView(user: userController.data.value),
             UserCommentView(user: userController.data.value),
+            UserFollowView(user: userController.data.value,),
+            UserFensView(user: userController.data.value,)
           ];
   }
 }

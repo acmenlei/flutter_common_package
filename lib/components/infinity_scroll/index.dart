@@ -12,7 +12,8 @@ class InfinityScroll extends StatelessWidget {
   final Map<String, dynamic> searchParams;
   final bool isCursorSearch;
   final bool? needStartRefresh;
-  final double? itemGap;
+  final EdgeInsetsGeometry? padding;
+
   const InfinityScroll({
     super.key,
     required this.fetcher,
@@ -21,14 +22,15 @@ class InfinityScroll extends StatelessWidget {
     this.isCursorSearch = false,
     this.splitter,
     this.needStartRefresh = true,
-    this.itemGap = 16,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     // ScrollController scrollController = ScrollController();
     EasyRefreshController easyRefreshController = EasyRefreshController();
-    InfinityScrollController infinityScrollController = InfinityScrollController(
+    InfinityScrollController infinityScrollController =
+        InfinityScrollController(
       fetcher,
       searchParams,
       isCursorSearch,
@@ -49,18 +51,19 @@ class InfinityScroll extends StatelessWidget {
               : null,
           onLoad: infinityScrollController.loadMore,
           child: ListView.builder(
-            shrinkWrap: true,
+            // shrinkWrap: true, // 用了 ExtendedNestedScrollView就不需要收缩了
             // controller: scrollController, // 用了 ExtendedNestedScrollView就不需要设置单独的controller了
             padding: const EdgeInsets.all(0), // 默认的内边距
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(itemGap ?? 0),
-                    child:
-                        itemRender(infinityScrollController.data[index]),
+                    padding: padding ?? const EdgeInsets.all(16),
+                    child: itemRender(infinityScrollController.data[index]),
                   ),
-                  index < infinityScrollController.data.length - 1 ?  _buildSplitter() : const SizedBox(),
+                  index < infinityScrollController.data.length - 1
+                      ? _buildSplitter()
+                      : const SizedBox(),
                 ],
               );
             },
