@@ -96,8 +96,10 @@ class EssayDetailPage extends StatelessWidget {
   // 标签
   _buildTags(EssayDetailController essay) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Obx(() => TagList(tags: essay.data.value.tags ?? [])),
+      padding: const EdgeInsets.all(16),
+      child: Obx(
+        () => TagList(tags: essay.data.value.tags ?? []),
+      ),
     );
   }
 

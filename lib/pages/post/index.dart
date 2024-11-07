@@ -94,7 +94,9 @@ class PostDetailPage extends StatelessWidget {
   _buildTags(PostDetailController post) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Obx(() => TagList(tags: post.data.value.tags ?? [])),
+      child: Obx(
+        () => TagList(tags: post.data.value.tags ?? []),
+      ),
     );
   }
 

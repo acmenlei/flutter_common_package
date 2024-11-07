@@ -1,3 +1,4 @@
+import 'package:codefather_app/pages/login/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/api/models/comment_model.dart';
@@ -44,18 +45,21 @@ class ReplyList extends StatelessWidget {
 
   // 回复内容
   _buildReplyItem(ReplyVo reply) {
+    AuthService authService = Get.find<AuthService>();
     return RichText(
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       text: TextSpan(style: const TextStyle(color: tertiaryColor), children: [
         TextSpan(
-          text: reply.user?.userName,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              Get.toNamed('/user/${reply.user?.id}', arguments: {'id': reply.user?.id});
-            },
-        ),
+            text: reply.user?.userName,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                if (authService.userVo.value.id != reply.user?.id) {
+                  Get.toNamed('/user/${reply.user?.id}',
+                      arguments: {'id': reply.user?.id});
+                }
+              }),
         _buildReplyUserName(reply),
         const TextSpan(text: "："),
         TextSpan(text: reply.content)
@@ -68,6 +72,7 @@ class ReplyList extends StatelessWidget {
     if (reply.replyUser == null) {
       return const TextSpan();
     }
+    AuthService authService = Get.find<AuthService>();
 
     return TextSpan(
       text: " 回复 ",
@@ -78,8 +83,10 @@ class ReplyList extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              Get.toNamed('/user/${reply.replyUser?.id}',
-                  arguments: {'id': reply.replyUser?.id});
+              if (authService.userVo.value.id != reply.user?.id) {
+                Get.toNamed('/user/${reply.replyUser?.id}',
+                    arguments: {'id': reply.replyUser?.id});
+              }
             },
         )
       ],
