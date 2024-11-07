@@ -13,7 +13,7 @@ import 'package:codefather_app/constants/thumb.dart';
 import 'package:codefather_app/utils/index.dart';
 import 'package:get/get.dart';
 
-/// 帖子详情页
+/// 问答详情页
 class QaDetailPage extends StatelessWidget {
   const QaDetailPage({super.key});
 
@@ -27,7 +27,7 @@ class QaDetailPage extends StatelessWidget {
           post: qa.data.value, // 帖子数据
           thumbTargetType: ThumbTargetTypeEnum.qa.value, // 点赞类型
           favourTargetType: FavourTargetTypeEnum.qa.value, // 收藏类型
-          commentTargetType: CommentTypeEnum.qa.value,
+          commentTargetType: CommentTypeEnum.qa.value, // 评论类型
         ),
       ),
       body: NestedScrollView(
@@ -38,30 +38,35 @@ class QaDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // 提问标题
+              _buildTitle(qa),
               // 用户信息【通用的公共组件】
               Obx(() => UserInfo(user: qa.data.value.user)),
               // 文章内容
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Obx(
-                    () => MdViewer(content: qa.data.value.content ?? '')),
+                child:
+                    Obx(() => MdViewer(content: qa.data.value.content ?? '')),
               ),
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              //   child: Obx(
-              //     () => PictureList(
-              //       pictureList: qa.data.value.pictureList ?? [],
-              //       grow: true,
-              //     ),
-              //   ),
-              // ),
               _buildTags(qa),
               _buildPublishTime(qa),
               ..._buildSplitter(),
               _buildCommentList(qa),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  // 问答标题
+  _buildTitle(qa) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Obx(
+        () => Text(
+          qa.data.value.title ?? '',
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

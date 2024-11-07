@@ -4,6 +4,7 @@ import 'package:codefather_app/pages/user/constants.dart';
 import 'package:codefather_app/pages/user/views/comment.dart';
 import 'package:codefather_app/pages/user/views/fens.dart';
 import 'package:codefather_app/pages/user/views/follow.dart';
+import 'package:codefather_app/pages/user/views/info.dart';
 import 'package:codefather_app/pages/user/views/post.dart';
 import 'package:codefather_app/pages/user/views/qa.dart';
 import 'package:codefather_app/utils/index.dart';
@@ -69,6 +70,7 @@ class UserPage extends StatelessWidget {
             UserPostView(user: userData),
             UserCommentView(user: userData),
             UserQaView(user: userData),
+            const UserInfoView(),
             UserFollowView(user: userData),
             UserFensView(user: userData)
           ]

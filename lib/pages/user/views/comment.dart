@@ -74,17 +74,16 @@ class UserPageCommentCard extends StatelessWidget {
       child: Row(
         children: [
           UserAvatar(
-            // user: data?.user,
             user: authService.userVo.value,
-            size: 10,
+            size: 14,
           ),
           const SizedBox(
             width: 6,
           ),
           UserTitle(
-            user: data?.user,
+            user: authService.userVo.value,
             color: tertiaryColor,
-            fontSize: 13,
+            fontSize: 14,
           ),
           const SizedBox(
             width: 6,
