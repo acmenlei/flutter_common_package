@@ -79,12 +79,16 @@ CommentVo _$CommentVoFromJson(Map<String, dynamic> json) => CommentVo(
           ? null
           : ReplyVoPage.fromJson(json['replyVOPage'] as Map<String, dynamic>),
       needVip: json['needVip'],
-      postVo: json['postVO'],
+      postVo: json['postVO'] == null
+          ? null
+          : PostModel.fromJson(json['postVO'] as Map<String, dynamic>),
       atUserList: json['atUserList'] as List<dynamic>?,
       atUserVoList: json['atUserVOList'],
       pictureList: json['pictureList'] as List<dynamic>?,
       courseArticleVo: json['courseArticleVO'],
-      qaVo: json['qaVO'],
+      qaVo: json['qaVO'] == null
+          ? null
+          : QaVoModel.fromJson(json['qaVO'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CommentVoToJson(CommentVo instance) => <String, dynamic>{

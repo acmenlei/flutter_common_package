@@ -4,6 +4,7 @@ import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/api/models/comment_vo_model.dart';
 import 'package:codefather_app/api/models/list_model.dart';
 import 'package:codefather_app/api/models/post_vo_model.dart';
+import 'package:codefather_app/api/models/qa_list_model.dart';
 import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
@@ -110,6 +111,11 @@ abstract class ApiService {
   Future<CommentListModel> listCommentPageUsingPOST(
       @Body() Map<String, dynamic> params);
 
+  // 用户个人主页评论
+  @POST('/comment/user/list/page/vo')
+  Future<CommentListModel> listUserCommentPageUsingPOST(
+      @Body() Map<String, dynamic> params);
+
   // 采纳回答
   @POST('/comment/accept/answer')
   Future<ResponseBoolModel> acceptAnswerUsingPOST(
@@ -137,6 +143,11 @@ abstract class ApiService {
   // 更新评论优先级
   @POST('/comment/update/priority')
   Future<ResponseBoolModel> updateCommentPriorityUsingPOST(
+      @Body() Map<String, dynamic> params);
+
+  // 问答
+  @POST('/qa/list/page/vo')
+  Future<QaModelList> listQaPageUsingPOST(
       @Body() Map<String, dynamic> params);
 
   /* 上传多个文件 */

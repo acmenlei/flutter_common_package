@@ -882,6 +882,41 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<CommentListModel> listUserCommentPageUsingPOST(
+      Map<String, dynamic> params) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(params);
+    final _options = _setStreamType<CommentListModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/comment/user/list/page/vo',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CommentListModel _value;
+    try {
+      _value = CommentListModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ResponseBoolModel> acceptAnswerUsingPOST(
       Map<String, dynamic> params) async {
     final _extra = <String, dynamic>{};
@@ -1084,6 +1119,40 @@ class _ApiService implements ApiService {
     late ResponseBoolModel _value;
     try {
       _value = ResponseBoolModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<QaModelList> listQaPageUsingPOST(Map<String, dynamic> params) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(params);
+    final _options = _setStreamType<QaModelList>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/qa/list/page/vo',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late QaModelList _value;
+    try {
+      _value = QaModelList.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

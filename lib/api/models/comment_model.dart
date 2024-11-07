@@ -1,3 +1,5 @@
+import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/qa_vo_model.dart';
 import 'package:codefather_app/api/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -113,7 +115,7 @@ class CommentVo {
   @JsonKey(name: "needVip")
   dynamic needVip;
   @JsonKey(name: "postVO")
-  dynamic postVo;
+  PostModel? postVo;
   @JsonKey(name: "atUserList")
   List<dynamic>? atUserList;
   @JsonKey(name: "atUserVOList")
@@ -123,7 +125,7 @@ class CommentVo {
   @JsonKey(name: "courseArticleVO")
   dynamic courseArticleVo;
   @JsonKey(name: "qaVO")
-  dynamic qaVo;
+  QaVoModel? qaVo;
 
   CommentVo({
     required this.id,
