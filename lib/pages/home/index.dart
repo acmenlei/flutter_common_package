@@ -80,17 +80,20 @@ class _HomePageState extends State<HomePage> {
 
   // 搜索按钮
   _buildSearchButton() {
-    return FilledButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+    return SizedBox(
+      height: 35,
+      child: FilledButton(
+        onPressed: () {},
+        style: ButtonStyle(
+          padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
+        child: const Text('搜索', softWrap: false,),
       ),
-      child: const Text('搜索'),
     );
   }
 
@@ -98,7 +101,7 @@ class _HomePageState extends State<HomePage> {
   _buildSearchBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 40,
+      height: 35,
       decoration: BoxDecoration(
         color: tertiaryColor.withOpacity(.06),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -108,14 +111,14 @@ class _HomePageState extends State<HomePage> {
           FaIcon(
             FontAwesomeIcons.search,
             color: tertiaryColor.withOpacity(.5),
-            size: 18,
+            size: 14,
           ),
           const SizedBox(width: 8),
           Text(
             "搜索",
             style: TextStyle(
               color: tertiaryColor.withOpacity(.3),
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
         ],
