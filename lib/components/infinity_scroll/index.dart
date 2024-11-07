@@ -33,7 +33,6 @@ class InfinityScroll extends StatelessWidget {
       searchParams,
       isCursorSearch,
     ); // 不需要添加到 Getx中，否则它会被持久化，这是不希望的
-
     return Obx(
       () {
         if (infinityScrollController.data.isEmpty &&
