@@ -59,7 +59,7 @@ dependencies:
   permission_handler: ^11.3.1
   multi_image_picker_plus: ^0.0.5
   cached_network_image: ^3.4.1
-  flutter_svg: ^2.0.11
+  flutter_svg: ^2.0.10+1
   fluwx: 4.5.5
   extended_nested_scroll_view: ^6.2.1
   
@@ -90,6 +90,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/vip/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
