@@ -13,6 +13,7 @@ import 'package:codefather_app/pages/search/views/qa.dart';
 import 'package:codefather_app/pages/search/views/resume.dart';
 import 'package:codefather_app/pages/search/views/tools.dart';
 import 'package:codefather_app/pages/search/views/user.dart';
+import 'package:codefather_app/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -28,9 +29,9 @@ class GeneralSearchPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: CommonTabBarLayout(
-          sliverBuilder: (context, isInnerBox) => [
-            _buildHeader(gsController),
-          ],
+          appbar: _buildHeader(gsController),
+          sliverTabBottomBuilder: (context, isInnerBox) =>
+              [_buildActions(gsController)],
           tabs: const [
             Tab(text: '综合'),
             Tab(text: '文章'),
@@ -140,6 +141,51 @@ class GeneralSearchPage extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  // 搜索按钮
+  _buildActions(GeneralSearchPageController gs) {
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: MySliverPersistentHeaderDelegate(
+        child: Container(
+          color: Get.theme.colorScheme.onPrimary,
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 4),
+          child: Obx(() {
+            // 循环
+            final children = gs.sortFields.map<Widget>(
+              (tab) {
+                final fristWidget = gs.sortFields.indexOf(tab) == 0;
+                final isActive = gs.sortField.value == tab["value"];
+                return GestureDetector(
+                  onTap: () => gs.setSortField(tab["value"]!),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isActive
+                          ? getPrimaryColor().withOpacity(.2)
+                          : tertiaryColor.withOpacity(.05),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                    margin: EdgeInsets.only(left: fristWidget ? 0 : 8),
+                    child: Text(
+                      tab["label"]!,
+                      style: TextStyle(
+                          color: isActive ? getPrimaryColor() : tertiaryColor),
+                    ),
+                  ),
+                );
+              },
+            ).toList();
+            return Row(children: children);
+          }),
+        ),
+        max: 45,
+        min: 45,
       ),
     );
   }

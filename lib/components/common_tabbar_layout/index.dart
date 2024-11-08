@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 /// 通用的tabbar布局
 class CommonTabBarLayout extends StatefulWidget {
   final Function(BuildContext, bool) sliverBuilder;
+  final Function(BuildContext, bool) sliverTabBottomBuilder;
   final List<Tab> tabs;
   final List<Widget> tabViewList;
   final double maxExtent;
@@ -19,9 +20,11 @@ class CommonTabBarLayout extends StatefulWidget {
   final Color? unselectedLabelColor; // 为选中的tab标签颜色
   final VoidCallback? onTabChange;
   final int initialIndex;
+  final SliverAppBar? appbar;
 
   const CommonTabBarLayout({
     super.key,
+    this.appbar,
     this.initialIndex = 0,
     this.onTabChange,
     this.labelColor,
@@ -36,6 +39,7 @@ class CommonTabBarLayout extends StatefulWidget {
     this.maxExtent = 60,
     this.minExtent = 60,
     this.sliverBuilder = _defaultSliverBuilder,
+    this.sliverTabBottomBuilder = _defaultSliverBuilder,
     required this.tabs,
     required this.tabViewList,
   });
@@ -87,6 +91,11 @@ class _CommonTabBarLayoutState extends State<CommonTabBarLayout>
           onlyOneScrollInBody:
               true, // 滚动视图只允许存在一个【共用一个scrollController，但是也不会出现tabbarView的重复请求问题】
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            widget.appbar == null
+                ? const SliverToBoxAdapter(
+                    child: SizedBox(),
+                  )
+                : widget.appbar!,
             ...widget.sliverBuilder(context, innerBoxIsScrolled),
             SliverPersistentHeader(
               delegate: MySliverPersistentHeaderDelegate(
@@ -110,6 +119,7 @@ class _CommonTabBarLayoutState extends State<CommonTabBarLayout>
               ),
               pinned: true,
             ),
+            ...widget.sliverTabBottomBuilder(context, innerBoxIsScrolled),
           ],
           body: TabBarView(
             controller: tabController,

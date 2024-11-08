@@ -35,17 +35,17 @@ class UserPage extends StatelessWidget {
         final userData = userController.data.value;
 
         return CommonTabBarLayout(
-          sliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverAppBar(
-              floating: true,
-              surfaceTintColor: Colors.transparent,
-              backgroundColor: Colors.white,
-              expandedHeight: 225,
-              flexibleSpace: FlexibleSpaceBar(
-                background: _buildMainUserInfo(userData),
-              ),
-              actions: [_buildEditIcon()],
+          appbar: SliverAppBar(
+            floating: true,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: Colors.white,
+            expandedHeight: 225,
+            flexibleSpace: FlexibleSpaceBar(
+              background: _buildMainUserInfo(userData),
             ),
+            actions: [_buildEditIcon()],
+          ),
+          sliverBuilder: (context, innerBoxIsScrolled) => [
             _buildUserBaseInfo(userData),
             _buildUserSecondaryInfo(userData),
             _buildVipCard(userData),

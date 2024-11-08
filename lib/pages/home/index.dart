@@ -43,9 +43,7 @@ class _HomePageState extends State<HomePage> {
               )),
             )),
           ],
-          sliverBuilder: (context, innerBoxIsScrolled) {
-            return [_buildHeader()];
-          },
+          appbar: _buildHeader(),
           tabViewList: [
             const FollowView(),
             const RecommandView(),

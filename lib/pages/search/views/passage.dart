@@ -3,6 +3,7 @@ import 'package:codefather_app/components/infinity_scroll/index.dart';
 import 'package:codefather_app/pages/search/controller.dart';
 import 'package:codefather_app/utils/render_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// 文章页面
 class PassageSearchView extends StatefulWidget {
@@ -18,6 +19,10 @@ class _PassageSearchViewState extends State<PassageSearchView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    ever(widget.searchController.searchText, (v) {
+      print("新值：$v");
+    });
 
     return InfinityScroll(
       fetcher: Http.client.searchUsingPOST,
