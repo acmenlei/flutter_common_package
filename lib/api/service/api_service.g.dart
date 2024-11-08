@@ -1264,6 +1264,40 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<SearchPageList> searchUsingPOST(Map<String, dynamic> params) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(params);
+    final _options = _setStreamType<SearchPageList>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/search/',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SearchPageList _value;
+    try {
+      _value = SearchPageList.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ResponseStringListModel> uploadFileBatch(
     List<File> files,
     String biz,

@@ -11,6 +11,7 @@ class InfinityScroll extends StatelessWidget {
   final Widget? splitter; // 分隔符
   final Map<String, dynamic> searchParams;
   final bool isCursorSearch;
+  final bool? isGeneralSearch;
   final bool? needStartRefresh;
   final EdgeInsetsGeometry? padding;
 
@@ -23,6 +24,7 @@ class InfinityScroll extends StatelessWidget {
     this.splitter,
     this.needStartRefresh = true,
     this.padding,
+    this.isGeneralSearch = false,
   });
 
   @override
@@ -34,6 +36,7 @@ class InfinityScroll extends StatelessWidget {
       fetcher,
       searchParams,
       isCursorSearch,
+      isGeneralSearch,
     ); // 不需要添加到 Getx中，否则它会被持久化，这是不希望的
     return Obx(
       () {

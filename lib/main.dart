@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: '编程导航',
         debugShowCheckedModeBanner: false,
+        darkTheme: ThemeData(colorScheme: MaterialTheme.darkScheme()),
         // defaultTransition: Transition.fadeIn, // 跳转动画
         theme: ThemeData(
           colorScheme: isDarkMode
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
               : MaterialTheme.lightScheme(),
           useMaterial3: true,
         ),
+        locale: Get.deviceLocale, // 设置语言
         getPages: routes,
         initialRoute: '/',
         home: const MainPage(),

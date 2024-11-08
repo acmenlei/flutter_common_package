@@ -10,6 +10,7 @@ import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
 import 'package:codefather_app/api/models/response_string_model.dart';
+import 'package:codefather_app/api/models/search_page_model.dart';
 import 'package:codefather_app/api/models/user_list_model.dart';
 import 'package:codefather_app/api/models/user_vo_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -165,6 +166,10 @@ abstract class ApiService {
   // 获取单条问答
   @GET('/qa/get/vo')
   Future<QaVoModelRecord> getQaVoById(@Query("id") String id);
+
+  // 综合搜索
+  @POST('/search/')
+  Future<SearchPageList> searchUsingPOST(@Body() Map<String, dynamic> params);
 
   /* 上传多个文件 */
   @POST('/file/upload/batch')

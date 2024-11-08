@@ -83,45 +83,52 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       height: 35,
       child: FilledButton(
-        onPressed: () {},
+        onPressed: () => Get.toNamed("/search"),
         style: ButtonStyle(
-          padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
+          padding:
+              const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),
-        child: const Text('搜索', softWrap: false,),
+        child: const Text(
+          '搜索',
+          softWrap: false,
+        ),
       ),
     );
   }
 
   // 搜索框
   _buildSearchBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 35,
-      decoration: BoxDecoration(
-        color: tertiaryColor.withOpacity(.06),
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Row(
-        children: [
-          FaIcon(
-            FontAwesomeIcons.search,
-            color: tertiaryColor.withOpacity(.5),
-            size: 14,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            "搜索",
-            style: TextStyle(
-              color: tertiaryColor.withOpacity(.3),
-              fontSize: 15,
+    return GestureDetector(
+      onTap: () => Get.toNamed("/search"),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        height: 35,
+        decoration: BoxDecoration(
+          color: tertiaryColor.withOpacity(.06),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Row(
+          children: [
+            FaIcon(
+              FontAwesomeIcons.search,
+              color: tertiaryColor.withOpacity(.5),
+              size: 14,
             ),
-          ),
-        ],
+            const SizedBox(width: 6),
+            Text(
+              "搜索",
+              style: TextStyle(
+                color: tertiaryColor.withOpacity(.5),
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

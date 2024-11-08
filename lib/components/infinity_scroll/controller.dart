@@ -11,12 +11,14 @@ class InfinityScrollController {
   Map<String, dynamic> defaultSearchParams = {};
   late Future<dynamic> Function(Map<String, dynamic> body) fetcher; // 获取数据的方法
   bool isCursorSearch = false;
+  bool isGeneralSearch = false;
 
-  InfinityScrollController(fetch, defaultParams, isCursor) {
+  InfinityScrollController(fetch, defaultParams, isCursor, isGS) {
     fetcher = fetch; // 获取数据的方法
     searchParams = deepCopy(defaultParams); // 默认参数
     defaultSearchParams = defaultParams;
     isCursorSearch = isCursor; // 是否是游标查询
+    isGeneralSearch = isGS; // 是否是搜索查询【搜索在外面包了一层 searchPage 】
     doFetch();
   }
 
@@ -25,9 +27,16 @@ class InfinityScrollController {
     searchParams = deepCopy(defaultSearchParams); // 重置参数
     try {
       final res = await fetcher(searchParams);
+      final searchData = isGeneralSearch ? res.data.searchPage : res.data;
       if (res.code == 0) {
-        total.value = int.parse(res.data.total.toString());
-        data.value = res.data.records ?? [];
+        // 判断是综合搜索接口查询还是普通查询
+        if (isGeneralSearch) {
+          total.value = int.parse(searchData.total.toString());
+          data.value = searchData.records ?? [];
+        } else {
+          total.value = int.parse(searchData.total.toString());
+          data.value = searchData.records ?? [];
+        }
       }
     } catch (e) {
       LogUtil.e(e);
@@ -61,12 +70,19 @@ class InfinityScrollController {
     isLoading.value = true;
     try {
       final res = await fetcher(searchParams);
-      if (res.data.records?.isEmpty == true) {
+      final searchData = isGeneralSearch ? res.data.searchPage : res.data;
+      if (searchData.records?.isEmpty == true) {
         return false;
       }
       if (res.code == 0) {
-        total.value = int.parse(res.data.total.toString());
-        data.value = [...data, ...(res.data.records ?? [])];
+        // 判断是综合搜索还是普通查询
+        if (isGeneralSearch) {
+          total.value = int.parse(searchData.total.toString());
+          data.value = [...data, ...(searchData.records ?? [])];
+        } else {
+          total.value = int.parse(searchData.total.toString());
+          data.value = [...data, ...(searchData.records ?? [])];
+        }
       }
     } catch (e) {
       // print(e);
