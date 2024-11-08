@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 简历页面
 class ResumeSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const ResumeSearchView({super.key, required this.searchController});
+  final int index;
+  const ResumeSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<ResumeSearchView> createState() => _ResumeSearchViewState();

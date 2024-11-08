@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 用户页面
 class UserSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const UserSearchView({super.key, required this.searchController});
+  final int index;
+  const UserSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<UserSearchView> createState() => _UserSearchViewState();

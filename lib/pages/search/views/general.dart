@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 /// 综合页面
 class GeneralView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const GeneralView({super.key, required this.searchController});
+  final int index;
+  const GeneralView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<GeneralView> createState() => _GeneralViewState();

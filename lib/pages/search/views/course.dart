@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 /// 文章页面
 class CourseSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const CourseSearchView({super.key, required this.searchController});
+  final int index;
+  const CourseSearchView({super.key, required this.searchController, required this.index});
 
   @override
   State<CourseSearchView> createState() => _CourseSearchViewState();

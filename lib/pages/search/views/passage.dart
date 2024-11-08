@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 /// 文章页面
 class PassageSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const PassageSearchView({super.key, required this.searchController});
+  final int index;
+  const PassageSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<PassageSearchView> createState() => _PassageSearchViewState();

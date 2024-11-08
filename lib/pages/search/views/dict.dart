@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 /// 文章页面
 class DictSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const DictSearchView({super.key, required this.searchController});
+  final int index;
+  const DictSearchView({super.key, required this.searchController, required this.index});
 
   @override
   State<DictSearchView> createState() => _DictSearchViewState();

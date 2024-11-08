@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 面经页面
 class ExperienceSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const ExperienceSearchView({super.key, required this.searchController});
+  final int index;
+  const ExperienceSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<ExperienceSearchView> createState() => _ExperienceSearchViewState();

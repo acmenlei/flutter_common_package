@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 问答页面
 class QaSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const QaSearchView({super.key, required this.searchController});
+  final int index;
+  const QaSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<QaSearchView> createState() => _QaSearchViewState();

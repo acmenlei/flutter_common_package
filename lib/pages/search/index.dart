@@ -25,10 +25,26 @@ class GeneralSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GeneralSearchPageController gsController = GeneralSearchPageController();
+    // tabview 视图
+    final tabViewList = [
+      (gs, index) => GeneralView(searchController: gs, index: index),
+      (gs, index) => PassageSearchView(searchController: gs, index: index),
+      (gs, index) => EssaySearchView(searchController: gs, index: index),
+      (gs, index) => CourseSearchView(searchController: gs, index: index),
+      (gs, index) => LiveSearchView(searchController: gs, index: index),
+      (gs, index) => ResumeSearchView(searchController: gs, index: index),
+      (gs, index) => InterviewSearchView(searchController: gs, index: index),
+      (gs, index) => ExperienceSearchView(searchController: gs, index: index),
+      (gs, index) => QaSearchView(searchController: gs, index: index),
+      (gs, index) => DictSearchView(searchController: gs, index: index),
+      (gs, index) => ToolsSearchView(searchController: gs, index: index),
+      (gs, index) => UserSearchView(searchController: gs, index: index),
+    ];
 
     return Scaffold(
       body: SafeArea(
         child: CommonTabBarLayout(
+          onTabChange: gsController.onTabChange,
           appbar: _buildHeader(gsController),
           sliverTabBottomBuilder: (context, isInnerBox) =>
               [_buildActions(gsController)],
@@ -46,20 +62,11 @@ class GeneralSearchPage extends StatelessWidget {
             Tab(text: '工具'),
             Tab(text: '用户'),
           ],
-          tabViewList: [
-            GeneralView(searchController: gsController),
-            PassageSearchView(searchController: gsController),
-            EssaySearchView(searchController: gsController),
-            CourseSearchView(searchController: gsController),
-            LiveSearchView(searchController: gsController),
-            ResumeSearchView(searchController: gsController),
-            InterviewSearchView(searchController: gsController),
-            ExperienceSearchView(searchController: gsController),
-            QaSearchView(searchController: gsController),
-            DictSearchView(searchController: gsController),
-            ToolsSearchView(searchController: gsController),
-            UserSearchView(searchController: gsController),
-          ],
+          tabViewList: tabViewList
+              .asMap()
+              .keys
+              .map((index) => tabViewList[index](gsController, index))
+              .toList(),
         ),
       ),
     );

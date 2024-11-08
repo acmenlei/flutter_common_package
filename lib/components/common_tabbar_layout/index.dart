@@ -18,7 +18,7 @@ class CommonTabBarLayout extends StatefulWidget {
   final Color? labelColor; // tab标签颜色
   final TextStyle? unselectedLabelStyle; // 未选中的tab标签样式
   final Color? unselectedLabelColor; // 为选中的tab标签颜色
-  final VoidCallback? onTabChange;
+  final Function(int)? onTabChange;
   final int initialIndex;
   final SliverAppBar? appbar;
 
@@ -77,7 +77,7 @@ class _CommonTabBarLayoutState extends State<CommonTabBarLayout>
 
   /// tab切换监听
   tabChangeListener() {
-    widget.onTabChange?.call();
+    widget.onTabChange?.call(tabController.index);
   }
 
   @override

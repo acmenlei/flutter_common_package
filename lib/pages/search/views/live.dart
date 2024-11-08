@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 直播页面
 class LiveSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const LiveSearchView({super.key, required this.searchController});
+  final int index;
+  const LiveSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<LiveSearchView> createState() => _LiveSearchViewState();

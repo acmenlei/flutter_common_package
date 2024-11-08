@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 /// 工具页面
 class ToolsSearchView extends StatefulWidget {
   final GeneralSearchPageController searchController;
-  const ToolsSearchView({super.key, required this.searchController});
+  final int index;
+  const ToolsSearchView(
+      {super.key, required this.searchController, required this.index});
 
   @override
   State<ToolsSearchView> createState() => _ToolsSearchViewState();
