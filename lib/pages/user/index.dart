@@ -25,7 +25,7 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserController userController = UserController();
+    UserController userController = Get.put(UserController());
 
     return Scaffold(
       body: SafeArea(child: Obx(() {
@@ -40,10 +40,11 @@ class UserPage extends StatelessWidget {
               floating: true,
               surfaceTintColor: Colors.transparent,
               backgroundColor: Colors.white,
-              expandedHeight: 220,
+              expandedHeight: 225,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildMainUserInfo(userData),
               ),
+              actions: [_buildEditIcon()],
             ),
             _buildUserBaseInfo(userData),
             _buildUserSecondaryInfo(userData),
@@ -53,6 +54,21 @@ class UserPage extends StatelessWidget {
           tabViewList: renderViews,
         );
       })),
+    );
+  }
+
+  _buildEditIcon() {
+    return Container(
+      margin: const EdgeInsets.only(right: 15),
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed('/settings');
+        },
+        child: const Icon(
+          Icons.settings_outlined,
+          color: secondaryColor,
+        ),
+      ),
     );
   }
 
@@ -106,6 +122,7 @@ class UserPage extends StatelessWidget {
                 UserTitle(
                   user: userData,
                   color: secondaryColor,
+                  fontSize: 18,
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -217,7 +234,7 @@ class UserPage extends StatelessWidget {
                 color: secondaryColor, fontWeight: FontWeight.bold)),
         TextSpan(
             text: (value ?? '0').toString(),
-            style:  TextStyle(color: tertiaryColor.withOpacity(.8))),
+            style: TextStyle(color: tertiaryColor.withOpacity(.8))),
       ],
     ));
   }

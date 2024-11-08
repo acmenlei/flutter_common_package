@@ -5,6 +5,7 @@ import 'package:codefather_app/pages/login/login_binding.dart';
 import 'package:codefather_app/pages/login/login_code.dart';
 import 'package:codefather_app/pages/post/index.dart';
 import 'package:codefather_app/pages/qaDetail/index.dart';
+import 'package:codefather_app/pages/settings/index.dart';
 import 'package:codefather_app/pages/user/index.dart';
 import 'package:codefather_app/pages/webview/web_binding.dart';
 import 'package:codefather_app/pages/webview/web_page.dart';
@@ -36,6 +37,7 @@ final routes = [
     page: () => const UserPage(),
   ),
   GetPage(name: '/webview', page: () => const WebPage(), binding: WebBinding()),
+  GetPage(name: '/settings', page: () => const SettingPage()),
   GetPage(
       name: '/login/code',
       binding: LoginBinding(),
