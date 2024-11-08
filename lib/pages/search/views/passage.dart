@@ -22,18 +22,14 @@ class _PassageSearchViewState extends State<PassageSearchView>
   Widget build(BuildContext context) {
     super.build(context);
 
-    ever(widget.searchController.searchText, (v) {
-      print("新值：$v");
-    });
-
     return InfinityScroll(
       fetcher: Http.client.searchUsingPOST,
-      searchParams: const {
+      searchParams: {
         "pageSize": 12,
         "sortOrder": "descend",
         "sortField": "_score",
-        "tags": [],
-        "searchText": "",
+        "tags": const [],
+        "searchText": Get.arguments?["keyword"] ?? '',
         "current": 1,
         "reviewStatus": 1,
         "hiddenContent": true,

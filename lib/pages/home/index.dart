@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       height: 35,
       child: FilledButton(
-        onPressed: () => Get.toNamed("/search"),
+        onPressed: () => Get.toNamed("/search_forward"),
         style: ButtonStyle(
           padding:
               const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
   // 搜索框
   _buildSearchBar() {
     return GestureDetector(
-      onTap: () => Get.toNamed("/search"),
+      onTap: () => Get.toNamed("/search_forward"),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 35,
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
               "搜索",
               style: TextStyle(
                 color: tertiaryColor.withOpacity(.5),
-                fontSize: 15,
+                fontSize: 14,
               ),
             ),
           ],

@@ -6,6 +6,7 @@ import 'package:codefather_app/pages/login/login_code.dart';
 import 'package:codefather_app/pages/post/index.dart';
 import 'package:codefather_app/pages/qaDetail/index.dart';
 import 'package:codefather_app/pages/search/index.dart';
+import 'package:codefather_app/pages/search/search_forward.dart';
 import 'package:codefather_app/pages/settings/index.dart';
 import 'package:codefather_app/pages/user/index.dart';
 import 'package:codefather_app/pages/webview/web_binding.dart';
@@ -50,6 +51,8 @@ final routes = [
   GetPage(name: '/webview', page: () => const WebPage(), binding: WebBinding()),
   // 设置页
   GetPage(name: '/settings', page: () => const SettingPage()),
-  // 综合搜索页
-  GetPage(name: '/search', page: () => const GeneralSearchPage()),
+  // 综合中转页
+  GetPage(name: '/search_forward', page: () => const SearchForWardPage(), transition: Transition.downToUp, transitionDuration: const Duration(milliseconds: 200)),
+  // 搜索结果
+  GetPage(name: '/search_result', page: () => const GeneralSearchPage(), transitionDuration: const Duration(milliseconds: 0)),
 ];

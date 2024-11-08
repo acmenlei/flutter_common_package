@@ -3,6 +3,7 @@ import 'package:codefather_app/components/infinity_scroll/index.dart';
 import 'package:codefather_app/pages/search/controller.dart';
 import 'package:codefather_app/utils/render_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// 面试题页面
 class InterviewSearchView extends StatefulWidget {
@@ -23,12 +24,12 @@ class _InterviewSearchViewState extends State<InterviewSearchView>
 
     return InfinityScroll(
       fetcher: Http.client.searchUsingPOST,
-      searchParams: const {
+      searchParams: {
         "pageSize": 12,
         "sortOrder": "descend",
         "sortField": "_score",
-        "tags": [],
-        "searchText": "",
+        "tags": const [],
+        "searchText": Get.arguments?["keyword"] ?? '',
         "current": 1,
         "reviewStatus": 1,
         "hiddenContent": true,

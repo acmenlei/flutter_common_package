@@ -1,3 +1,4 @@
+import 'package:codefather_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,4 +10,16 @@ Color borderColor() {
 // 字体颜色
 Color getPrimaryFontColor() {
   return Get.theme.indicatorColor;
+}
+
+Color getTertiaryColor() {
+  return tertiaryColor;
+}
+
+Color getSecondaryColor() {
+  return secondaryColor;
+}
+
+Color getShallowTertiaryColor(double? depth) {
+  return tertiaryColor.withOpacity(depth ?? .1);
 }
