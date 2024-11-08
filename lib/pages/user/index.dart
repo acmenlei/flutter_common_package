@@ -39,7 +39,7 @@ class UserPage extends StatelessWidget {
             floating: true,
             surfaceTintColor: Colors.transparent,
             backgroundColor: Colors.white,
-            expandedHeight: 225,
+            expandedHeight: 200,
             flexibleSpace: FlexibleSpaceBar(
               background: _buildMainUserInfo(userData),
             ),
@@ -59,7 +59,7 @@ class UserPage extends StatelessWidget {
 
   _buildEditIcon() {
     return Container(
-      margin: const EdgeInsets.only(right: 15),
+      margin: const EdgeInsets.only(right: 16),
       child: GestureDetector(
         onTap: () {
           Get.toNamed('/settings');
@@ -109,7 +109,7 @@ class UserPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +126,7 @@ class UserPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "简介：${userData.userProfile ?? ''}",
+                  "${userData.userProfile ?? '这个人很懒，还没有介绍'}",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: tertiaryColor),
