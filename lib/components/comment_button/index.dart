@@ -13,6 +13,7 @@ class CommentButton extends StatelessWidget {
   final double size;
   final double width;
   final String? type; // 评论数量显示规则？是评论的回复数还是文章的评论数？
+  final Function? onPress;
 
   const CommentButton({
     super.key,
@@ -22,6 +23,7 @@ class CommentButton extends StatelessWidget {
     this.width = 40,
     this.type = 'post', // 默认为显示文章的
     required this.targetType,
+    this.onPress
   });
 
   @override
@@ -47,7 +49,7 @@ class CommentButton extends StatelessWidget {
   // 垂直
   Widget _buildVertical(CommentButtonController commentButtonController) {
     return GestureDetector(
-      onTap: () => commentButtonController.onPress(data?.id, targetType),
+      onTap: () => onPress == null ? commentButtonController.onPress(data?.id, targetType) : onPress?.call(),
       child: Obx(() => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -70,7 +72,7 @@ class CommentButton extends StatelessWidget {
   // 横向
   Widget _buildHorizontal(CommentButtonController commentButtonController) {
     return GestureDetector(
-      onTap: () => commentButtonController.onPress(data?.id, targetType),
+      onTap: () => onPress == null ? commentButtonController.onPress(data?.id, targetType) : onPress?.call(),
       child: Obx(() => Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

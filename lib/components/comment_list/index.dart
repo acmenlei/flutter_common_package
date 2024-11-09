@@ -63,8 +63,8 @@ class CommentList extends StatelessWidget {
               "sortField": commentListController.sortField.value,
               "sortOrder": "descend"
             },
-            itemRender: (item) =>
-                CommentItem(data: item, targetType: targetType),
+            itemRender: (item) => CommentItem(
+                data: item, targetType: targetType, originPost: data),
           ),
         ),
       ],
@@ -80,7 +80,8 @@ class CommentList extends StatelessWidget {
       children: newComments
           .map<Widget>((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: CommentItem(data: item, targetType: targetType),
+                child: CommentItem(
+                    data: item, targetType: targetType, originPost: data),
               ))
           .toList(),
     );

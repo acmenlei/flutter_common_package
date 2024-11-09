@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/components/common_editor/controller.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/constants/file.dart';
@@ -18,7 +17,7 @@ class CommonEditor extends StatefulWidget {
   // 请求提交
   final Future<dynamic> Function(Map<String, dynamic> body) onSubmit;
   final Map<String, dynamic> extraParams;
-  final Function(CommentVo body)? onRefresh;
+  final Function(dynamic body)? onRefresh;
   final int maxLength;
   final int maxLines;
   final String placeHolder;

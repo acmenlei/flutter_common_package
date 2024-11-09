@@ -1,5 +1,4 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/components/common_editor/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/components/comment_button/index.dart';
@@ -16,7 +15,7 @@ import 'package:markdown_widget/markdown_widget.dart';
 // 底部信息和操作
 class BottomInfoAction extends StatelessWidget {
   final dynamic post;
-  final Function(CommentVo comment)? onRefresh;
+  final Function(dynamic comment)? onRefresh;
   final TocController? tocController;
   final int thumbTargetType; // 点赞targetType
   final int favourTargetType; // 收藏targetType

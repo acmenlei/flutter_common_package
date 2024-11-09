@@ -28,6 +28,7 @@ class EssayDetailPage extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => BottomInfoAction(
           post: essay.data.value, // 帖子数据
+          onRefresh: essay.onRefreshComment, // 刷新新评论
           thumbTargetType: ThumbTargetTypeEnum.essay.value, // 点赞类型
           favourTargetType: FavourTargetTypeEnum.essay.value, // 收藏类型
           commentTargetType: CommentTypeEnum.essay.value,
@@ -88,6 +89,8 @@ class EssayDetailPage extends StatelessWidget {
         () => CommentList(
           data: essay.data.value,
           targetType: CommentTypeEnum.essay.value,
+          newComments: essay.newComments,
+          onRefresh: essay.onClearNewComment,
         ),
       ),
     );

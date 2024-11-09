@@ -136,9 +136,8 @@ abstract class ApiService {
       @Body() Map<String, dynamic> params);
 
   // 根据ID获取评论
-  @POST('/comment/get/vo')
-  Future<CommentVoModel> getCommentVOByIdUsingGET(
-      @Body() Map<String, dynamic> params);
+  @GET('/comment/get/vo')
+  Future<CommentVoModel> getCommentVOByIdUsingGET(@Query("id") String id);
 
   // 发布评论
   @POST('/comment/add')
@@ -157,6 +156,16 @@ abstract class ApiService {
   // 更新评论优先级
   @POST('/comment/update/priority')
   Future<ResponseBoolModel> updateCommentPriorityUsingPOST(
+      @Body() Map<String, dynamic> params);
+
+  // 回复相关
+  @POST('/reply/add')
+  Future<ResponseStringModel> addReplyUsingPOST(
+      @Body() Map<String, dynamic> params);
+
+  // 回复相关
+  @POST('/reply/delete')
+  Future<ResponseBoolModel> deleteReplyUsingPOST(
       @Body() Map<String, dynamic> params);
 
   // 问答
