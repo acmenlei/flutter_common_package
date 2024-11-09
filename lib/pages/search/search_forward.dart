@@ -89,7 +89,7 @@ class SearchForWardPage extends StatelessWidget {
                     arguments: {"keyword": value}),
                 cursorHeight: 14,
                 decoration: InputDecoration(
-                  hintText: '搜索',
+                  hintText: "搜索文章/交流/教程/直播等内容",
                   hintStyle: TextStyle(color: getShallowTertiaryColor(.5)),
                   border: InputBorder.none,
                 ),
