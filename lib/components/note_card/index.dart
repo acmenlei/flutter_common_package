@@ -29,7 +29,7 @@ class NoteCard extends StatelessWidget {
 
   // 标题
   Widget _buildTitle() {
-    String title = '笔记' ?? data.title ?? '';
+    String title = data.title ?? '';
     if (title.isEmpty) {
       return Container();
     }
