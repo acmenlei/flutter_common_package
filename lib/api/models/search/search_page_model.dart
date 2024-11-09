@@ -1,33 +1,48 @@
-import 'package:codefather_app/api/models/qa_vo_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'qa_list_model.g.dart';
+part 'search_page_model.g.dart';
 
 @JsonSerializable()
-class QaModelList {
+class SearchPageList {
   @JsonKey(name: "code")
   int code;
   @JsonKey(name: "data")
-  ResponseQaRecords data;
+  SearchPage data;
   @JsonKey(name: "message")
   String message;
 
-  QaModelList({
+  SearchPageList({
     required this.code,
     required this.data,
     required this.message,
   });
 
-  factory QaModelList.fromJson(Map<String, dynamic> json) =>
-      _$QaModelListFromJson(json);
+  factory SearchPageList.fromJson(Map<String, dynamic> json) =>
+      _$SearchPageListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QaModelListToJson(this);
+  Map<String, dynamic> toJson() => _$SearchPageListToJson(this);
+}
+
+@JsonSerializable()
+class SearchPage {
+  @JsonKey(name: "searchPage")
+  ResponseQaRecords searchPage;
+
+  SearchPage({
+    required this.searchPage,
+  });
+
+  factory SearchPage.fromJson(Map<String, dynamic> json) =>
+      _$SearchPageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchPageToJson(this);
 }
 
 @JsonSerializable()
 class ResponseQaRecords {
   @JsonKey(name: "records")
-  List<QaVoModel>? records;
+  List<PostModel>? records;
   @JsonKey(name: "total")
   String? total;
   @JsonKey(name: "size")

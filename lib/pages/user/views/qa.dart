@@ -1,5 +1,5 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/components/infinity_scroll/index.dart';
 import 'package:codefather_app/components/qa_card/index.dart';
 import 'package:codefather_app/components/segmented/index.dart';

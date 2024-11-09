@@ -1,5 +1,5 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/post_vo_model.dart';
+import 'package:codefather_app/api/models/post/post_vo_model.dart';
 import 'package:get/get.dart';
 
 class EssayDetailController {

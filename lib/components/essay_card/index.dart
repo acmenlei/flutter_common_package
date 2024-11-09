@@ -1,6 +1,6 @@
 import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/components/picture_list/index.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';

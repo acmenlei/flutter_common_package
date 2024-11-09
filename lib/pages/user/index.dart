@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/components/common_tabbar_layout/index.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/constants/colors.dart';
 
 class UserDescription extends StatelessWidget {

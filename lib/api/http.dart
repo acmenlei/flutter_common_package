@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:codefather_app/api/interceptors/request.dart';
 import 'package:codefather_app/api/interceptors/response.dart';
-import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/api/service/api_service.dart';
 import 'package:codefather_app/constants/index.dart';
 import 'package:path_provider/path_provider.dart';

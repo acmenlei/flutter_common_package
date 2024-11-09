@@ -1,6 +1,6 @@
 // 渲染卡片
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/components/essay_card/index.dart';
 import 'package:codefather_app/components/post_card/index.dart';
 import 'package:codefather_app/constants/post.dart';
@@ -10,5 +10,6 @@ Widget renderItem(PostModel data) {
   if (data.category == PostCategoryEnum.essay.label) {
     return EssayCard(data: data);
   }
+  print(data.category);
   return PostCard(data: data);
 }

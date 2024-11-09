@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/comment_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'comment_vo_model.g.dart';

@@ -1,5 +1,5 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/qa_vo_model.dart';
+import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
 import 'package:get/get.dart';
 
 class QaDetailController {

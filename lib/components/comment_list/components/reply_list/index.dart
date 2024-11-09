@@ -1,7 +1,7 @@
 import 'package:codefather_app/pages/login/auth_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/comment_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:get/get.dart';
 

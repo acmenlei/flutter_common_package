@@ -1,5 +1,5 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/comment_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
 import 'package:codefather_app/utils/log.dart';
 import 'package:get/get.dart';
 

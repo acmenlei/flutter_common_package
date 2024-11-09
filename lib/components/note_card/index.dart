@@ -8,9 +8,9 @@ import 'package:codefather_app/utils/index.dart';
 import 'package:get/get.dart';
 
 /// 通用的内容型卡片
-class QaCard extends StatelessWidget {
+class NoteCard extends StatelessWidget {
   final QaVoModel data;
-  const QaCard({super.key, required this.data});
+  const NoteCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class QaCard extends StatelessWidget {
       return Container();
     }
     return GestureDetector(
-      onTap: () => Get.toNamed('/qa/${data.id}', arguments: {'id': data.id}),
+      onTap: () => Get.toNamed('/note/${data.id}', arguments: {'id': data.id}),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Text(
@@ -82,7 +82,7 @@ class QaCard extends StatelessWidget {
   Widget _buildDescription() {
     String content = data.plainTextDescription ?? data.content ?? '';
     return GestureDetector(
-      onTap: () => Get.toNamed('/qa/${data.id}', arguments: {'id': data.id}),
+      onTap: () => Get.toNamed('/note/${data.id}', arguments: {'id': data.id}),
       child: SizedBox(
         // width: double.infinity,
         child: Text(

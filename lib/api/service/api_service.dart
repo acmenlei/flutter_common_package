@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:codefather_app/api/models/comment_model.dart';
-import 'package:codefather_app/api/models/comment_vo_model.dart';
-import 'package:codefather_app/api/models/list_model.dart';
-import 'package:codefather_app/api/models/post_vo_model.dart';
-import 'package:codefather_app/api/models/qa_list_model.dart';
-import 'package:codefather_app/api/models/qa_vo_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
+import 'package:codefather_app/api/models/comment/comment_vo_model.dart';
+import 'package:codefather_app/api/models/post/list_model.dart';
+import 'package:codefather_app/api/models/post/post_vo_model.dart';
+import 'package:codefather_app/api/models/qa/qa_list_model.dart';
+import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
 import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
 import 'package:codefather_app/api/models/response_string_model.dart';
-import 'package:codefather_app/api/models/search_page_model.dart';
-import 'package:codefather_app/api/models/user_list_model.dart';
-import 'package:codefather_app/api/models/user_vo_model.dart';
+import 'package:codefather_app/api/models/search/search_page_model.dart';
+import 'package:codefather_app/api/models/user/user_list_model.dart';
+import 'package:codefather_app/api/models/user/user_vo_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 part 'api_service.g.dart';
@@ -179,6 +179,8 @@ abstract class ApiService {
   // 综合搜索
   @POST('/search/')
   Future<SearchPageList> searchUsingPOST(@Body() Map<String, dynamic> params);
+
+  // 笔记相关
 
   /* 上传多个文件 */
   @POST('/file/upload/batch')

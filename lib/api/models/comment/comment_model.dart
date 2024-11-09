@@ -1,6 +1,6 @@
-import 'package:codefather_app/api/models/post_model.dart';
-import 'package:codefather_app/api/models/qa_vo_model.dart';
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
+import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'comment_model.g.dart';

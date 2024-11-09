@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'post_vo_model.g.dart';

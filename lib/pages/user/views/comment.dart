@@ -1,5 +1,5 @@
-import 'package:codefather_app/api/models/comment_model.dart';
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';
 import 'package:codefather_app/constants/colors.dart';

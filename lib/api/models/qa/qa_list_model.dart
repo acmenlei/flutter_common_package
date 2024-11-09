@@ -1,33 +1,33 @@
-import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'list_model.g.dart';
+part 'qa_list_model.g.dart';
 
 @JsonSerializable()
-class PostModelList {
+class QaModelList {
   @JsonKey(name: "code")
   int code;
   @JsonKey(name: "data")
-  ResponseRecords data;
+  ResponseQaRecords data;
   @JsonKey(name: "message")
   String message;
 
-  PostModelList({
+  QaModelList({
     required this.code,
     required this.data,
     required this.message,
   });
 
-  factory PostModelList.fromJson(Map<String, dynamic> json) =>
-      _$PostModelListFromJson(json);
+  factory QaModelList.fromJson(Map<String, dynamic> json) =>
+      _$QaModelListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PostModelListToJson(this);
+  Map<String, dynamic> toJson() => _$QaModelListToJson(this);
 }
 
 @JsonSerializable()
-class ResponseRecords {
+class ResponseQaRecords {
   @JsonKey(name: "records")
-  List<PostModel>? records;
+  List<QaVoModel>? records;
   @JsonKey(name: "total")
   String? total;
   @JsonKey(name: "size")
@@ -47,7 +47,7 @@ class ResponseRecords {
   @JsonKey(name: "pages")
   String? pages;
 
-  ResponseRecords({
+  ResponseQaRecords({
     required this.records,
     required this.total,
     required this.size,
@@ -60,8 +60,8 @@ class ResponseRecords {
     required this.pages,
   });
 
-  factory ResponseRecords.fromJson(Map<String, dynamic> json) =>
-      _$ResponseRecordsFromJson(json);
+  factory ResponseQaRecords.fromJson(Map<String, dynamic> json) =>
+      _$ResponseQaRecordsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResponseRecordsToJson(this);
+  Map<String, dynamic> toJson() => _$ResponseQaRecordsToJson(this);
 }

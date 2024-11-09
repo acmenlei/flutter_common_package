@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/utils/auth.dart';
 import 'package:flutter/material.dart';
 

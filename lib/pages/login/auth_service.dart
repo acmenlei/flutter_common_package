@@ -1,5 +1,5 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/user_model.dart';
+import 'package:codefather_app/api/models/user/user_model.dart';
 import 'package:codefather_app/pages/login/user_secure_storage.dart';
 import 'package:codefather_app/utils/log.dart';
 import 'package:get/get.dart';

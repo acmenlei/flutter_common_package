@@ -1,46 +1,31 @@
-import 'package:codefather_app/api/models/post_model.dart';
+import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'search_page_model.g.dart';
+part 'list_model.g.dart';
 
 @JsonSerializable()
-class SearchPageList {
+class PostModelList {
   @JsonKey(name: "code")
   int code;
   @JsonKey(name: "data")
-  SearchPage data;
+  ResponseRecords data;
   @JsonKey(name: "message")
   String message;
 
-  SearchPageList({
+  PostModelList({
     required this.code,
     required this.data,
     required this.message,
   });
 
-  factory SearchPageList.fromJson(Map<String, dynamic> json) =>
-      _$SearchPageListFromJson(json);
+  factory PostModelList.fromJson(Map<String, dynamic> json) =>
+      _$PostModelListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SearchPageListToJson(this);
+  Map<String, dynamic> toJson() => _$PostModelListToJson(this);
 }
 
 @JsonSerializable()
-class SearchPage {
-  @JsonKey(name: "searchPage")
-  ResponseQaRecords searchPage;
-
-  SearchPage({
-    required this.searchPage,
-  });
-
-  factory SearchPage.fromJson(Map<String, dynamic> json) =>
-      _$SearchPageFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SearchPageToJson(this);
-}
-
-@JsonSerializable()
-class ResponseQaRecords {
+class ResponseRecords {
   @JsonKey(name: "records")
   List<PostModel>? records;
   @JsonKey(name: "total")
@@ -62,7 +47,7 @@ class ResponseQaRecords {
   @JsonKey(name: "pages")
   String? pages;
 
-  ResponseQaRecords({
+  ResponseRecords({
     required this.records,
     required this.total,
     required this.size,
@@ -75,8 +60,8 @@ class ResponseQaRecords {
     required this.pages,
   });
 
-  factory ResponseQaRecords.fromJson(Map<String, dynamic> json) =>
-      _$ResponseQaRecordsFromJson(json);
+  factory ResponseRecords.fromJson(Map<String, dynamic> json) =>
+      _$ResponseRecordsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResponseQaRecordsToJson(this);
+  Map<String, dynamic> toJson() => _$ResponseRecordsToJson(this);
 }

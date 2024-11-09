@@ -2,7 +2,7 @@ import 'package:codefather_app/api/http.dart';
 import 'package:codefather_app/components/comment_list/components/comment_item/controller.dart';
 import 'package:codefather_app/components/common_editor/index.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/comment_model.dart';
+import 'package:codefather_app/api/models/comment/comment_model.dart';
 import 'package:codefather_app/components/comment_button/index.dart';
 import 'package:codefather_app/components/comment_list/components/reply_list/index.dart';
 import 'package:codefather_app/components/thumb_button/index.dart';
