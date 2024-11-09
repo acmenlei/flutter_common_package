@@ -10,14 +10,21 @@ import 'package:get/get.dart';
 
 /// 评论列表
 class CommentList extends StatelessWidget {
-  final dynamic data; // 评论数据
+  final dynamic data; // 文章/内容数据（里面有评论相关）
+  final List<dynamic> newComments; // 新评论数据
   final int targetType; // 当前选中的评论类型
-  const CommentList({super.key, required this.data, required this.targetType});
+  final VoidCallback? onRefresh; // 清空新评论
+  const CommentList({
+    super.key,
+    required this.data,
+    required this.targetType,
+    this.newComments = const [],
+    this.onRefresh,
+  });
 
   @override
   Widget build(BuildContext context) {
     CommentListController commentListController = CommentListController();
-    // print("====commentList build====");
     // targetID不存在的话就不请求数据
     if (data.id == null) {
       return Container();
@@ -38,24 +45,45 @@ class CommentList extends StatelessWidget {
 
   // 构建评论列表
   _buildCommentList(commentListController) {
-    return Obx(() {
-      return ReachBottomLoadList(
-        splitter: const SizedBox(height: 16),
-        needStartRefresh: false,
-        itemGap: 0,
-        fetcher: Http.client.listCommentPageUsingPOST,
-        searchParams: {
-          "targetType": commentListController.targetType.value,
-          "targetId": commentListController.targetId.value,
-          "reviewStatus": 1,
-          "pageSize": 10,
-          "current": 1,
-          "sortField": commentListController.sortField.value,
-          "sortOrder": "descend"
-        },
-        itemRender: (item) => CommentItem(data: item, targetType: targetType),
-      );
-    });
+    return Column(
+      children: [
+        Obx(() => _buildNewComments(commentListController)),
+        Obx(
+          () => ReachBottomLoadList(
+            splitter: const SizedBox(height: 16),
+            needStartRefresh: false,
+            itemGap: 0,
+            fetcher: Http.client.listCommentPageUsingPOST,
+            searchParams: {
+              "targetType": commentListController.targetType.value,
+              "targetId": commentListController.targetId.value,
+              "reviewStatus": 1,
+              "pageSize": 10,
+              "current": 1,
+              "sortField": commentListController.sortField.value,
+              "sortOrder": "descend"
+            },
+            itemRender: (item) =>
+                CommentItem(data: item, targetType: targetType),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // 新发布的评论列表更新
+  _buildNewComments(CommentListController commentListController) {
+    if (newComments.isEmpty) {
+      return Container();
+    }
+    return Column(
+      children: newComments
+          .map<Widget>((item) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: CommentItem(data: item, targetType: targetType),
+              ))
+          .toList(),
+    );
   }
 
   // 评论列表
@@ -115,7 +143,10 @@ class CommentList extends StatelessWidget {
               color: tertiaryColor,
               selectedColor: getPrimaryFontColor(),
               fillColor: getPrimaryColor(),
-              onPressed: commentListController.onPressed,
+              onPressed: (index) {
+                commentListController.onPressed(index);
+                onRefresh?.call(); // 清空之前的新数据
+              },
               children: const [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),

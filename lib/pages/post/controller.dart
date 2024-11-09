@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class PostDetailController {
   String id = Get.arguments?["id"] ?? '';
   Rx<PostVoModel> data = PostVoModel().obs;
+  RxList newComments = [].obs; // 用来存储新发的帖子
 
   getPostVoById() async {
     try {
@@ -16,5 +17,15 @@ class PostDetailController {
     } catch (e) {
       LogUtil.e(e);
     }
+  }
+
+  // 新评论
+  onRefreshComment(newData) {
+    newComments.value = [newData, ...newComments];
+  }
+
+  // 清空新评论
+  onClearNewComment() {
+    newComments.clear();
   }
 }

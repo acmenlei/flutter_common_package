@@ -30,6 +30,7 @@ class PostDetailPage extends StatelessWidget {
         () => BottomInfoAction(
           post: post.data.value, // 帖子数据
           tocController: tocController, // 目录控制器
+          onRefresh: post.onRefreshComment, // 新发的评论会存储到这里然后传给评论组件
           thumbTargetType: ThumbTargetTypeEnum.post.value, // 点赞类型
           favourTargetType: FavourTargetTypeEnum.post.value, // 收藏类型
           commentTargetType: CommentTypeEnum.post.value, // 评论类型
@@ -40,7 +41,6 @@ class PostDetailPage extends StatelessWidget {
               [_buildAppBar(post)],
           // 不能用listView，否则会懒加载导致不断销毁重建
           body: SingleChildScrollView(
-            // physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -80,13 +80,17 @@ class PostDetailPage extends StatelessWidget {
   }
 
   // 评论列表
-  _buildCommentList(post) {
+  _buildCommentList(PostDetailController post) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Obx(() => CommentList(
-            data: post.data.value,
-            targetType: CommentTypeEnum.post.value,
-          )),
+      child: Obx(
+        () => CommentList(
+          data: post.data.value,
+          targetType: CommentTypeEnum.post.value,
+          newComments: post.newComments,
+          onRefresh: post.onClearNewComment,
+        ),
+      ),
     );
   }
 
@@ -123,39 +127,3 @@ class PostDetailPage extends StatelessWidget {
     ];
   }
 }
-
-
-  // CustomScrollView(
-  //         slivers: [
-  //           SliverAppBar(
-  //             title: Obx(() => Text(post.data.value.title ?? '',
-  //                 style: const TextStyle(
-  //                     fontSize: 16, fontWeight: FontWeight.bold))),
-  //             floating: true,
-  //             snap: true,
-  //           ),
-  //           // 用户信息【通用的公共组件】
-  //           SliverToBoxAdapter(
-  //               child: Obx(() => UserInfo(user: post.data.value.user))),
-  //           // 文章内容
-  //           SliverPadding(
-  //             padding: const EdgeInsets.all(16.0),
-  //             sliver: SliverToBoxAdapter(
-  //               child: Obx(
-  //               () => MdViewer(
-  //                 content: post.data.value.content ?? '',
-  //                 tocController: tocController,
-  //               ),
-  //             ),
-  //             ),
-  //           ),
-  //           SliverToBoxAdapter(
-  //             child: _buildPublishTime(),
-  //           ),
-  //           ..._buildSplitter(),
-  //           SliverToBoxAdapter(
-  //             child: _buildCommentList(),
-  //           ),
-  //           TocWidget(controller: tocController)
-  //         ],
-  //       )

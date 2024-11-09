@@ -19,3 +19,15 @@ enum CommentTypeEnum {
     required this.origin,
   });
 }
+
+// 评论内容类型
+enum CommentContentTypeEnum {
+  richText(label: '富文本', value: 0),
+  md(label: 'markdown', value: 1),
+  custom(label: '自定义格式', value: 2);
+
+  final String label;
+  final int value;
+
+  const CommentContentTypeEnum({required this.label, required this.value});
+}

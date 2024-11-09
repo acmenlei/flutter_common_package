@@ -1,3 +1,6 @@
+import 'package:codefather_app/api/http.dart';
+import 'package:codefather_app/api/models/comment_model.dart';
+import 'package:codefather_app/components/common_editor/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/components/comment_button/index.dart';
 import 'package:codefather_app/components/favour_button/index.dart';
@@ -13,18 +16,21 @@ import 'package:markdown_widget/markdown_widget.dart';
 // 底部信息和操作
 class BottomInfoAction extends StatelessWidget {
   final dynamic post;
+  final Function(CommentVo comment)? onRefresh;
   final TocController? tocController;
   final int thumbTargetType; // 点赞targetType
   final int favourTargetType; // 收藏targetType
   final int commentTargetType; // 评论targetType
 
-  const BottomInfoAction(
-      {super.key,
-      this.post,
-      this.tocController,
-      required this.thumbTargetType,
-      required this.favourTargetType,
-      required this.commentTargetType});
+  const BottomInfoAction({
+    super.key,
+    this.post,
+    this.tocController,
+    this.onRefresh,
+    required this.thumbTargetType,
+    required this.favourTargetType,
+    required this.commentTargetType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +47,7 @@ class BottomInfoAction extends StatelessWidget {
           Stack(
             clipBehavior: Clip.none, // 不裁剪
             children: [
-              UserAvatar(
-                user: post?.user,
-              ),
+              UserAvatar(user: post?.user),
               // 关注按钮
               Positioned(
                 bottom: -15, // 将按钮定位到底部
@@ -60,7 +64,7 @@ class BottomInfoAction extends StatelessWidget {
           ThumbButton(data: post, targetType: thumbTargetType),
           FavourButton(data: post, targetType: favourTargetType),
           _buildTocButton(context, tocController),
-          _buildPublishInput(),
+          _buildPublishInput(context),
         ],
       ),
     );
@@ -104,31 +108,47 @@ class BottomInfoAction extends StatelessWidget {
     );
   }
 
-  _buildPublishInput() {
+  _buildPublishInput(context) {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 8),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(8),
+      child: GestureDetector(
+        onTap: () => showModalBottomSheet(
+          builder: (context) => CommonEditor(
+            onSubmit: Http.client.addCommentUsingPOST,
+            onRefresh: onRefresh,
+            extraParams: {
+              "targetType": commentTargetType,
+              "targetId": post?.id
+            },
+          ),
+          context: context,
+          backgroundColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.pen,
-                  color: tertiaryColor.withOpacity(.5),
-                  size: 14,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  '写评论',
-                  style: TextStyle(color: tertiaryColor.withOpacity(.5)),
-                )
-              ],
+        child: Container(
+          margin:
+              const EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.pen,
+                    color: tertiaryColor.withOpacity(.5),
+                    size: 14,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    '写评论',
+                    style: TextStyle(color: tertiaryColor.withOpacity(.5)),
+                  )
+                ],
+              ),
             ),
           ),
         ),

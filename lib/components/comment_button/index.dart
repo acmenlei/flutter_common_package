@@ -34,7 +34,7 @@ class CommentButton extends StatelessWidget {
         commentButtonController.commentNum.value = data?.commentNum ?? 0;
       } else {
         commentButtonController.commentNum.value =
-            int.parse(data?.replyVoPage?.total);
+            int.parse(data?.replyVoPage?.total ?? '0');
       }
     });
 

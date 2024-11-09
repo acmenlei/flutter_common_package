@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:codefather_app/api/http.dart';
+import 'package:codefather_app/api/models/comment_model.dart';
 import 'package:codefather_app/components/common_editor/controller.dart';
 import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/constants/file.dart';
@@ -16,15 +17,22 @@ import 'package:path_provider/path_provider.dart';
 class CommonEditor extends StatefulWidget {
   // 请求提交
   final Future<dynamic> Function(Map<String, dynamic> body) onSubmit;
+  final Map<String, dynamic> extraParams;
+  final Function(CommentVo body)? onRefresh;
   final int maxLength;
   final int maxLines;
   final String placeHolder;
+  final int contentType;
+
   const CommonEditor({
     super.key,
     required this.onSubmit,
+    this.extraParams = const {},
     this.maxLength = 1000,
     this.maxLines = 6,
     this.placeHolder = '请输入内容',
+    this.onRefresh,
+    this.contentType = 2, // 默认就是 custom 格式
   });
 
   @override
@@ -104,7 +112,9 @@ class _CommonEditorState extends State<CommonEditor>
                   children: [
                     _buildInput(context),
                     _buildSelector(),
-                    const SizedBox(height: 2,)
+                    const SizedBox(
+                      height: 2,
+                    )
                   ],
                 ),
               ),
@@ -247,9 +257,13 @@ class _CommonEditorState extends State<CommonEditor>
               final res = await widget.onSubmit({
                 "content": content,
                 "pictureList": renderImages,
+                "contentType": widget.contentType,
+                ...widget.extraParams, // 额外参数比如：targetType
               });
+
               if (res.code == 0) {
                 showToast('已发布');
+                widget.onRefresh?.call(res.data);
                 _dismiss();
               }
             },

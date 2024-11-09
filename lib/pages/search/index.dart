@@ -107,11 +107,10 @@ class GeneralSearchPage extends StatelessWidget {
 
   // 搜索框
   _buildSearchBar() {
-    String keyword = Get.arguments["keyword"].toString();
+    String keyword = Get.arguments?["keyword"] ?? '';
     return GestureDetector(
-      onTap: () => Get.offAndToNamed("/search_forward", arguments: {
-        "keyword": Get.arguments["keyword"],
-      }),
+      onTap: () =>
+          Get.offAndToNamed("/search_forward", arguments: {"keyword": keyword}),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 35,
@@ -133,7 +132,9 @@ class GeneralSearchPage extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: TextStyle(
-                  color: keyword.isEmpty ? getShallowTertiaryColor(.6) : getSecondaryColor(),
+                  color: keyword.isEmpty
+                      ? getShallowTertiaryColor(.6)
+                      : getSecondaryColor(),
                   fontSize: 14,
                 ),
               ),
