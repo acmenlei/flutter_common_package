@@ -232,13 +232,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PostModelList> getPosts(Map<String, dynamic> body) async {
+  Future<CommonList> getPosts(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<PostModelList>(Options(
+    final _options = _setStreamType<CommonList>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -255,9 +255,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PostModelList _value;
+    late CommonList _value;
     try {
-      _value = PostModelList.fromJson(_result.data!);
+      _value = CommonList.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -266,14 +266,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PostModelList> listMyPostVOByPageUsingPOST(
+  Future<CommonList> listMyPostVOByPageUsingPOST(
       Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<PostModelList>(Options(
+    final _options = _setStreamType<CommonList>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -290,9 +290,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PostModelList _value;
+    late CommonList _value;
     try {
-      _value = PostModelList.fromJson(_result.data!);
+      _value = CommonList.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -301,13 +301,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PostModelList> getFollowPosts(Map<String, dynamic> body) async {
+  Future<CommonList> getFollowPosts(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<PostModelList>(Options(
+    final _options = _setStreamType<CommonList>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -324,9 +324,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PostModelList _value;
+    late CommonList _value;
     try {
-      _value = PostModelList.fromJson(_result.data!);
+      _value = CommonList.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1358,6 +1358,39 @@ class _ApiService implements ApiService {
     late SearchPageList _value;
     try {
       _value = SearchPageList.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<NoteVoModel> getNoteVoById(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<NoteVoModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/note/get/vo',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late NoteVoModel _value;
+    try {
+      _value = NoteVoModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

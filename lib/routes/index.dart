@@ -3,6 +3,7 @@ import 'package:codefather_app/pages/index/index.dart';
 import 'package:codefather_app/pages/login/index.dart';
 import 'package:codefather_app/pages/login/login_binding.dart';
 import 'package:codefather_app/pages/login/login_code.dart';
+import 'package:codefather_app/pages/noteDetail/index.dart';
 import 'package:codefather_app/pages/post/index.dart';
 import 'package:codefather_app/pages/qaDetail/index.dart';
 import 'package:codefather_app/pages/search/index.dart';
@@ -25,6 +26,11 @@ final routes = [
   GetPage(
     name: '/essay/:id',
     page: () => const EssayDetailPage(),
+  ),
+  // 笔记详情页
+  GetPage(
+    name: '/note/:id',
+    page: () => const NoteDetailPage(),
   ),
   // 问答详情页
   GetPage(
@@ -52,7 +58,14 @@ final routes = [
   // 设置页
   GetPage(name: '/settings', page: () => const SettingPage()),
   // 综合中转页
-  GetPage(name: '/search_forward', page: () => const SearchForWardPage(), transition: Transition.downToUp, transitionDuration: const Duration(milliseconds: 200)),
+  GetPage(
+      name: '/search_forward',
+      page: () => const SearchForWardPage(),
+      transition: Transition.downToUp,
+      transitionDuration: const Duration(milliseconds: 200)),
   // 搜索结果
-  GetPage(name: '/search_result', page: () => const GeneralSearchPage(), transitionDuration: const Duration(milliseconds: 0)),
+  GetPage(
+      name: '/search_result',
+      page: () => const GeneralSearchPage(),
+      transitionDuration: const Duration(milliseconds: 0)),
 ];

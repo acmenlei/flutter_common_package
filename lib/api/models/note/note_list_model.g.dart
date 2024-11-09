@@ -23,7 +23,7 @@ Map<String, dynamic> _$NoteModelListToJson(NoteModelList instance) =>
 ResponseNoteRecords _$ResponseNoteRecordsFromJson(Map<String, dynamic> json) =>
     ResponseNoteRecords(
       records: (json['records'] as List<dynamic>?)
-          ?.map((e) => NoteVoModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => NoteModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       total: json['total'] as String?,
       size: json['size'] as String?,

@@ -47,7 +47,7 @@ class CommentList extends StatelessWidget {
   _buildCommentList(commentListController) {
     return Column(
       children: [
-        Obx(() => _buildNewComments(commentListController)),
+        _buildNewComments(commentListController),
         Obx(
           () => ReachBottomLoadList(
             splitter: const SizedBox(height: 16),
@@ -73,10 +73,7 @@ class CommentList extends StatelessWidget {
 
   // 新发布的评论列表更新
   _buildNewComments(CommentListController commentListController) {
-    if (newComments.isEmpty) {
-      return Container();
-    }
-    return Column(
+    return Obx(() => Column(
       children: newComments
           .map<Widget>((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
@@ -84,7 +81,7 @@ class CommentList extends StatelessWidget {
                     data: item, targetType: targetType, originPost: data),
               ))
           .toList(),
-    );
+    ));
   }
 
   // 评论列表

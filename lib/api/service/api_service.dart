@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:codefather_app/api/models/comment/comment_model.dart';
 import 'package:codefather_app/api/models/comment/comment_vo_model.dart';
+import 'package:codefather_app/api/models/note/note_vo_model.dart';
 import 'package:codefather_app/api/models/post/list_model.dart';
 import 'package:codefather_app/api/models/post/post_vo_model.dart';
 import 'package:codefather_app/api/models/qa/qa_list_model.dart';
@@ -10,6 +11,7 @@ import 'package:codefather_app/api/models/response_bool_model.dart';
 import 'package:codefather_app/api/models/response_num_model.dart';
 import 'package:codefather_app/api/models/response_string_list_model.dart';
 import 'package:codefather_app/api/models/response_string_model.dart';
+import 'package:codefather_app/api/models/search/common_list_model.dart';
 import 'package:codefather_app/api/models/search/search_page_model.dart';
 import 'package:codefather_app/api/models/user/user_list_model.dart';
 import 'package:codefather_app/api/models/user/user_vo_model.dart';
@@ -45,35 +47,44 @@ abstract class ApiService {
   @POST('/essay/list/page/vo')
   Future<PostModelList> listEssayVOByPageUsingPOST(
       @Body() Map<String, dynamic> body);
-  // 首页数据
+
+  // 首页数据【混合了多种类型数据】
   @POST('/post/list/page/vo')
-  Future<PostModelList> getPosts(@Body() Map<String, dynamic> body);
+  Future<CommonList> getPosts(@Body() Map<String, dynamic> body);
+
   // 获取用户个人的帖子数据
   @POST('/post/my/list/page/vo')
-  Future<PostModelList> listMyPostVOByPageUsingPOST(
+  Future<CommonList> listMyPostVOByPageUsingPOST(
       @Body() Map<String, dynamic> body);
+
   // 关注数据
   @POST('/post/list/follow/post/page')
-  Future<PostModelList> getFollowPosts(@Body() Map<String, dynamic> body);
+  Future<CommonList> getFollowPosts(@Body() Map<String, dynamic> body);
+
   // 获取单条帖子
   @GET('/post/get/vo')
   Future<PostVoModelRecord> getPostVoById(@Query("id") String id);
+
   // 发布帖子，返回的是成功后的 ID
   @POST('/post/add')
   Future<ResponseStringModel> addPostUsingPOST(
       @Body() Map<String, dynamic> params);
+
   // 批量新增帖子，返回的是是否成功
   @POST('/post/add/batch')
   Future<ResponseBoolModel> addPostBatchUsingPOST(
       @Body() Map<String, dynamic> params);
+
   // 删除帖子，返回是否操作成功
   @POST('/post/delete')
   Future<ResponseBoolModel> deletePostUsingPOST(
       @Body() Map<String, dynamic> params);
+
   // 编辑帖子，返回是否操作成功
   @POST('/post/edit')
   Future<ResponseBoolModel> editPostUsingPOST(
       @Body() Map<String, dynamic> params);
+
   // 更新帖子，返回是否操作成功
   @POST('/post/update')
   Future<ResponseBoolModel> updatePostUsingPOST(
@@ -181,6 +192,9 @@ abstract class ApiService {
   Future<SearchPageList> searchUsingPOST(@Body() Map<String, dynamic> params);
 
   // 笔记相关
+  // 获取单条笔记
+  @GET('/note/get/vo')
+  Future<NoteVoModel> getNoteVoById(@Query("id") String id);
 
   /* 上传多个文件 */
   @POST('/file/upload/batch')

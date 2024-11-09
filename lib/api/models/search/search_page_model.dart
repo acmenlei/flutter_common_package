@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/post/post_model.dart';
+import 'package:codefather_app/api/models/search/common_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'search_page_model.g.dart';
@@ -27,7 +27,7 @@ class SearchPageList {
 @JsonSerializable()
 class SearchPage {
   @JsonKey(name: "searchPage")
-  ResponseQaRecords searchPage;
+  ResponseSearchCommonRecords searchPage;
 
   SearchPage({
     required this.searchPage,
@@ -40,9 +40,9 @@ class SearchPage {
 }
 
 @JsonSerializable()
-class ResponseQaRecords {
+class ResponseSearchCommonRecords {
   @JsonKey(name: "records")
-  List<PostModel>? records;
+  List<CommonModel>? records;
   @JsonKey(name: "total")
   String? total;
   @JsonKey(name: "size")
@@ -62,7 +62,7 @@ class ResponseQaRecords {
   @JsonKey(name: "pages")
   String? pages;
 
-  ResponseQaRecords({
+  ResponseSearchCommonRecords({
     required this.records,
     required this.total,
     required this.size,
@@ -75,8 +75,8 @@ class ResponseQaRecords {
     required this.pages,
   });
 
-  factory ResponseQaRecords.fromJson(Map<String, dynamic> json) =>
-      _$ResponseQaRecordsFromJson(json);
+  factory ResponseSearchCommonRecords.fromJson(Map<String, dynamic> json) =>
+      _$ResponseSearchCommonRecordsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResponseQaRecordsToJson(this);
+  Map<String, dynamic> toJson() => _$ResponseSearchCommonRecordsToJson(this);
 }

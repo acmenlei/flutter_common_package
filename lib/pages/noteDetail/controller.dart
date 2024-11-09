@@ -1,21 +1,21 @@
 import 'package:codefather_app/api/http.dart';
-import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
+import 'package:codefather_app/api/models/note/note_model.dart';
 import 'package:get/get.dart';
 
-class QaDetailController {
+class NoteDetailController {
   String id = Get.arguments?["id"] ?? '';
-  Rx<QaVoModel> data = QaVoModel().obs;
+  Rx<NoteModel> data = NoteModel().obs;
   RxList newComments = [].obs; // 用来存储新发的帖子评论
 
-  QaDetailController() {
-    getQaVoById();
+  NoteDetailController() {
+    getNoteVoById();
   }
 
-  getQaVoById() async {
+  getNoteVoById() async {
     if (id.isEmpty) {
       return;
     }
-    final res = await Http.client.getQaVoById(id);
+    final res = await Http.client.getNoteVoById(id);
     if (res.code == 0) {
       data.value = res.data;
     }

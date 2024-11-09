@@ -1,4 +1,4 @@
-import 'package:codefather_app/api/models/qa/qa_vo_model.dart';
+import 'package:codefather_app/api/models/search/common_model.dart';
 import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
@@ -7,9 +7,9 @@ import 'package:codefather_app/constants/colors.dart';
 import 'package:codefather_app/utils/index.dart';
 import 'package:get/get.dart';
 
-/// 通用的内容型卡片
+/// 笔记卡片
 class NoteCard extends StatelessWidget {
-  final QaVoModel data;
+  final CommonModel data;
   const NoteCard({super.key, required this.data});
 
   @override
@@ -29,7 +29,7 @@ class NoteCard extends StatelessWidget {
 
   // 标题
   Widget _buildTitle() {
-    String title = data.title ?? '';
+    String title = '笔记' ?? data.title ?? '';
     if (title.isEmpty) {
       return Container();
     }

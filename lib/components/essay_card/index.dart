@@ -1,6 +1,6 @@
+import 'package:codefather_app/api/models/search/common_model.dart';
 import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/components/picture_list/index.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 /// 通用的交流卡片
 class EssayCard extends StatelessWidget {
-  final PostModel data;
+  final CommonModel data;
   const EssayCard({super.key, required this.data});
 
   @override
@@ -93,12 +93,12 @@ class EssayCard extends StatelessWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-      _buildActionItem(Icons.thumb_up_alt_outlined, data.thumbNum ?? 0),
-      // _buildActionItem(Icons.star_border, widget.data.favourNum ?? 0),
-      _buildActionItem(Icons.mode_comment_outlined, data.commentNum ?? 0),
-      const Spacer(),
-      TagList(tags: data.tags ?? [], fontSize: 13, max: 3)
-    ],
+          _buildActionItem(Icons.thumb_up_alt_outlined, data.thumbNum ?? 0),
+          // _buildActionItem(Icons.star_border, widget.data.favourNum ?? 0),
+          _buildActionItem(Icons.mode_comment_outlined, data.commentNum ?? 0),
+          const Spacer(),
+          TagList(tags: data.tags ?? [], fontSize: 13, max: 3)
+        ],
       ),
     );
   }

@@ -1,33 +1,33 @@
-import 'package:codefather_app/api/models/note/note_model.dart';
+import 'package:codefather_app/api/models/search/common_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'note_list_model.g.dart';
+part 'common_list_model.g.dart';
 
 @JsonSerializable()
-class NoteModelList {
+class CommonList {
   @JsonKey(name: "code")
   int code;
   @JsonKey(name: "data")
-  ResponseNoteRecords data;
+  ResponseCommonRecords data;
   @JsonKey(name: "message")
   String message;
 
-  NoteModelList({
+  CommonList({
     required this.code,
     required this.data,
     required this.message,
   });
 
-  factory NoteModelList.fromJson(Map<String, dynamic> json) =>
-      _$NoteModelListFromJson(json);
+  factory CommonList.fromJson(Map<String, dynamic> json) =>
+      _$CommonListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NoteModelListToJson(this);
+  Map<String, dynamic> toJson() => _$CommonListToJson(this);
 }
 
 @JsonSerializable()
-class ResponseNoteRecords {
+class ResponseCommonRecords {
   @JsonKey(name: "records")
-  List<NoteModel>? records;
+  List<CommonModel>? records;
   @JsonKey(name: "total")
   String? total;
   @JsonKey(name: "size")
@@ -47,7 +47,7 @@ class ResponseNoteRecords {
   @JsonKey(name: "pages")
   String? pages;
 
-  ResponseNoteRecords({
+  ResponseCommonRecords({
     required this.records,
     required this.total,
     required this.size,
@@ -60,8 +60,8 @@ class ResponseNoteRecords {
     required this.pages,
   });
 
-  factory ResponseNoteRecords.fromJson(Map<String, dynamic> json) =>
-      _$ResponseNoteRecordsFromJson(json);
+  factory ResponseCommonRecords.fromJson(Map<String, dynamic> json) =>
+      _$ResponseCommonRecordsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResponseNoteRecordsToJson(this);
+  Map<String, dynamic> toJson() => _$ResponseCommonRecordsToJson(this);
 }

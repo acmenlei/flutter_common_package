@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:codefather_app/api/interceptors/request.dart';
 import 'package:codefather_app/api/interceptors/response.dart';
-import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/api/service/api_service.dart';
 import 'package:codefather_app/constants/index.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,18 +41,5 @@ class Http {
         'domain': cookie.domain ?? '',
       };
     }).toList();
-  }
-
-  /// todo: 获取文章列表【此处请求逻辑应该抽离到单独的页面中】
-  static Future<List<PostModel>?> get(params) async {
-    try {
-      final response = await client.getPosts(params);
-      if (response.code == 0) {
-        return response.data.records;
-      }
-      return null;
-    } catch (e) {
-      throw Exception(e);
-    }
   }
 }

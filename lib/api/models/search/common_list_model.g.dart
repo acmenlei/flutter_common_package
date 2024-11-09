@@ -1,38 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_page_model.dart';
+part of 'common_list_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchPageList _$SearchPageListFromJson(Map<String, dynamic> json) =>
-    SearchPageList(
+CommonList _$CommonListFromJson(Map<String, dynamic> json) => CommonList(
       code: (json['code'] as num).toInt(),
-      data: SearchPage.fromJson(json['data'] as Map<String, dynamic>),
+      data:
+          ResponseCommonRecords.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$SearchPageListToJson(SearchPageList instance) =>
+Map<String, dynamic> _$CommonListToJson(CommonList instance) =>
     <String, dynamic>{
       'code': instance.code,
       'data': instance.data,
       'message': instance.message,
     };
 
-SearchPage _$SearchPageFromJson(Map<String, dynamic> json) => SearchPage(
-      searchPage: ResponseSearchCommonRecords.fromJson(
-          json['searchPage'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$SearchPageToJson(SearchPage instance) =>
-    <String, dynamic>{
-      'searchPage': instance.searchPage,
-    };
-
-ResponseSearchCommonRecords _$ResponseSearchCommonRecordsFromJson(
+ResponseCommonRecords _$ResponseCommonRecordsFromJson(
         Map<String, dynamic> json) =>
-    ResponseSearchCommonRecords(
+    ResponseCommonRecords(
       records: (json['records'] as List<dynamic>?)
           ?.map((e) => CommonModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -47,8 +37,8 @@ ResponseSearchCommonRecords _$ResponseSearchCommonRecordsFromJson(
       pages: json['pages'] as String?,
     );
 
-Map<String, dynamic> _$ResponseSearchCommonRecordsToJson(
-        ResponseSearchCommonRecords instance) =>
+Map<String, dynamic> _$ResponseCommonRecordsToJson(
+        ResponseCommonRecords instance) =>
     <String, dynamic>{
       'records': instance.records,
       'total': instance.total,

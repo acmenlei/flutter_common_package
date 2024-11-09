@@ -1,6 +1,6 @@
+import 'package:codefather_app/api/models/search/common_model.dart';
 import 'package:codefather_app/components/tag_list/index.dart';
 import 'package:flutter/material.dart';
-import 'package:codefather_app/api/models/post/post_model.dart';
 import 'package:codefather_app/components/cached_image/index.dart';
 import 'package:codefather_app/components/user_avatar/index.dart';
 import 'package:codefather_app/components/user_title/index.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 /// 通用的内容型卡片
 class PostCard extends StatelessWidget {
-  final PostModel data;
+  final CommonModel data;
   const PostCard({super.key, required this.data});
 
   @override
