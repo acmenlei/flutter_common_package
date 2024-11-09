@@ -7,10 +7,12 @@ import 'package:get/get.dart';
 
 /// 底部导航栏控制器
 class FollowController {
-  var followStatus = FollowTypeEnum.followSuccess.value.obs;
-
-  FollowController();
+  var followStatus = 0.obs;
   AuthService authService = Get.find<AuthService>();
+
+  FollowController(int fs) {
+    followStatus.value = fs;
+  }
 
   void setInitialFollowStatus(int status) {
     followStatus.value = status;

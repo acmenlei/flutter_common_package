@@ -25,7 +25,7 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserController userController = Get.put(UserController());
+    UserController userController = UserController();
 
     return Scaffold(
       body: SafeArea(child: Obx(() {
@@ -33,6 +33,10 @@ class UserPage extends StatelessWidget {
             userController.isMy.value ? userPageTabs : otherUserPageTabs;
         List<Widget> renderViews = getRenderTabViews(userController);
         final userData = userController.data.value;
+
+        if (userController.userId.value.isEmpty) {
+          return const SizedBox();
+        }
 
         return CommonTabBarLayout(
           appbar: SliverAppBar(

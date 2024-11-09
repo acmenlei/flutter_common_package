@@ -23,3 +23,7 @@ Color getSecondaryColor() {
 Color getShallowTertiaryColor(double? depth) {
   return tertiaryColor.withOpacity(depth ?? .1);
 }
+// 一般是白色背景
+Color getSecondaryBackgroud() {
+  return Get.theme.colorScheme.onPrimary;
+}

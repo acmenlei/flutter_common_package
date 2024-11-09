@@ -1,6 +1,6 @@
 import 'package:codefather_app/constants/external.dart';
 import 'package:codefather_app/constants/index.dart';
-import 'package:codefather_app/pages/user/controller.dart';
+import 'package:codefather_app/pages/settings/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,6 @@ class SettingPage extends StatelessWidget {
 
   // 渲染主体内容
   Widget renderBody() {
-    UserController userController = Get.find<UserController>();
     return SingleChildScrollView(
       child: Flex(
         direction: Axis.vertical,
@@ -39,12 +38,12 @@ class SettingPage extends StatelessWidget {
             }),
           ]),
           const SizedBox(height: 10),
-          SizedBox(
+          const SizedBox(
             height: 55,
             width: double.maxFinite,
             child: InkWell(
-              onTap: userController.logout,
-              child: const Center(
+              onTap: logout,
+              child: Center(
                 child: Text(
                   "退出登录",
                   style: TextStyle(color: Colors.red, fontSize: 16),
@@ -55,9 +54,8 @@ class SettingPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 14),
             child: const Center(
-              child:
-                  Text("编程导航 ${Global.domain}", style: TextStyle(fontSize: 14))
-            ),
+                child: Text("编程导航 ${Global.domain}",
+                    style: TextStyle(fontSize: 14))),
           )
         ],
       ),

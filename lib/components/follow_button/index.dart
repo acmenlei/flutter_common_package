@@ -1,5 +1,7 @@
+import 'package:codefather_app/utils/color.dart';
+import 'package:codefather_app/utils/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+// import 'package:flutter/scheduler.dart';
 import 'package:codefather_app/api/models/user_model.dart';
 import 'package:codefather_app/components/follow_button/controller.dart';
 import 'package:codefather_app/pages/login/auth_service.dart';
@@ -14,13 +16,7 @@ class FollowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthService authService = Get.find<AuthService>();
-    FollowController followController = FollowController();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      // 初始化关注状态【在构建完成之后，该回调会执行】
-      // 参考文档：https://saw2110.medium.com/understanding-flutters-addpostframecallback-a-practical-guide-b3d3133b6b85
-      followController.setInitialFollowStatus(user?.followStatus ?? 0);
-    });
+    FollowController followController = FollowController(user?.followStatus ?? 0);
 
     if (authService.userVo.value.id == user?.id) {
       return const SizedBox();
@@ -54,6 +50,7 @@ class FollowButton extends StatelessWidget {
   _buildFollowed(FollowController followController) {
     return ElevatedButton(
       onPressed: () => followController.onPress(user?.id ?? ''),
+      style: _ghostStyle(),
       child: const Text('已关注'),
     );
   }
@@ -62,7 +59,16 @@ class FollowButton extends StatelessWidget {
   _buildEachFollowed(FollowController followController) {
     return ElevatedButton(
       onPressed: () => followController.onPress(user?.id ?? ''),
+      style: _ghostStyle(),
       child: const Text('已互粉'),
     );
+  }
+
+  _ghostStyle() {
+    return ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(getSecondaryBackgroud()),
+        shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+        side: WidgetStatePropertyAll(BorderSide(color: getPrimaryColor()))
+      );
   }
 }
